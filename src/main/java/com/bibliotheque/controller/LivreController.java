@@ -45,6 +45,13 @@ public class LivreController {
         return livre;
     }
 
+    /* Controller pour la liste de tous les livres disponibles */
+    @RequestMapping(path ="/disponibles",method = RequestMethod.GET)
+    public List<Livre> getAllLivresDisponibles() {
+        List<Livre> listLivresDisponibles = livreService.getAllLivresDisponibles();
+        return listLivresDisponibles;
+    }
+
 
     /* controller pour ajouter un livre */
     @PostMapping("/addLivre")

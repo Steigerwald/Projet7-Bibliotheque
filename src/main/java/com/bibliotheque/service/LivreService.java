@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +32,23 @@ public class LivreService {
         return  livreRepository.findById(id).get();
     }
 
+    /*Methode pour obtenir tous les Livres disponibles de la base de données*/
+    public List<Livre> getAllLivresDisponibles() {
+        List<Livre> result1 =(List<Livre>) livreRepository.findAll();
+        List<Livre> result2=new ArrayList<Livre>();
+        if(result1.size() > 0) {
+            logger.info(" retour liste result1 de tous les livres de la BD avec getAllLivresDisponoibles si taille de result1 >0 ");
+            for (int i=0;i<result1.size();i=i+1){
+                if (result1.get(i).getDisponibilite()) {
+                    result2.add(result1.get(i));
+                }
+            }
+            return result2;
+        } else {
+            logger.info(" retour nouvelle liste des Livres Disponibles car pas d'élément dans la liste result1 ");
+            return result2;
+        }
+    }
 
     /*Methode pour sauvegarder un livre dans la base de données*/
     public void save(Livre livre) {
