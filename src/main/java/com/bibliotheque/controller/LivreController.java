@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -48,10 +47,8 @@ public class LivreController {
     /* Controller pour la liste de tous les livres disponibles */
     @RequestMapping(path ="/disponibles",method = RequestMethod.GET)
     public List<Livre> getAllLivresDisponibles() {
-        List<Livre> listLivresDisponibles = livreService.getAllLivresDisponibles();
-        return listLivresDisponibles;
+        return livreService.getAllLivresDisponibles();
     }
-
 
     /* controller pour ajouter un livre */
     @PostMapping("/addLivre")
@@ -82,6 +79,18 @@ public class LivreController {
     public ResponseEntity<List<LivreDTO> >searchLivresByTitreOrByAuteurOrByNomCategorie(@RequestBody SearchDTO searchDTO) {
         Search search=searchMapper.toEntity(searchDTO);
         List<Livre> listLivresTrouves = livreService.getAllLivresBySearch(search);
+        if (listLivresTrouves.size()==0){
+            return null;
+        } else{
+            return new ResponseEntity<>(livreMapper.toDto(listLivresTrouves),HttpStatus.OK);
+        }
+    }
+
+    /* Controller pour chercher un livre par titre disponible et tous les exemplaires */
+    @RequestMapping(path = "/exemplairesDisponibles", method = RequestMethod.POST,produces = "application/json")
+    public ResponseEntity<List<LivreDTO> >searchExemplairesDisponibles(@RequestBody SearchDTO searchDTO) throws RecordNotFoundException {
+        Search search=searchMapper.toEntity(searchDTO);
+        List<Livre> listLivresTrouves =livreService.getLivreDisponibleByTitre(search.getTitre());
         if (listLivresTrouves.size()==0){
             return null;
         } else{

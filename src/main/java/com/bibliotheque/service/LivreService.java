@@ -116,11 +116,30 @@ public class LivreService {
     }
 
 
-    //Methode pour une recherche de livres
+    /*Methode pour une recherche de livres*/
     public List<Livre> getAllLivresBySearch(Search search){
         List<Livre> listLivresTrouvesDeRecherche=livreRepository.findAllLivresByTitreOrAuteurOrNomCategorie(search.getTitre(),search.getAuteur(),search.getNomCategorie());
         return listLivresTrouvesDeRecherche;
     }
+
+    /*Methode pour obtenir tous les exemplaires disponibles d'un livre par titre */
+    public List<Livre> getLivreDisponibleByTitre(String titre) throws RecordNotFoundException {
+        List<Livre> listeLivresTrouves = livreRepository.findByTitre(titre);
+        List<Livre> livresDisponibles =new ArrayList<>();
+        if(listeLivresTrouves.size()>0) {
+            logger.info(" retour du livre car la liste des livre trouvé n'est pas vide ");
+            for (int i=0;i<listeLivresTrouves.size();i++){
+                if (listeLivresTrouves.get(i).getDisponibilite()){
+                    livresDisponibles.add(listeLivresTrouves.get(i));
+                }
+            }
+            return livresDisponibles;
+            // attention à prévoir le cas où livresDisponibles est null lorsque tous les exemplaires sont loués
+        } else {
+            throw new RecordNotFoundException("Pas de livre enregistré avec cet Id");
+        }
+    }
+
 
 
 }
