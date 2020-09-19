@@ -52,7 +52,6 @@ public class Livre {
     }
 
     // getters
-
     public int getIdLivre() {
         return idLivre;
     }
@@ -97,9 +96,8 @@ public class Livre {
         return disponibilite;
     }
 
-// setters
 
-
+    // setters
     public void setIdLivre(int idLivre) {
         this.idLivre = idLivre;
     }

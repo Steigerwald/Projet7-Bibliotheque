@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -71,7 +72,6 @@ public class LivreService {
             livreAModifier.setPrixLocation(entity.getPrixLocation());
             livreAModifier.setEtatLivre(entity.getEtatLivre());
             livreAModifier.setDisponibilite(entity.getDisponibilite());
-
             /*
             livreAModifier.setBibliotheque(entity.getBibliotheque());
             livreAModifier.setReservation(entity.getReservation());
@@ -84,7 +84,16 @@ public class LivreService {
         }
     }
 
-
+    /*Methode pour effacer un livre dans la base de données*/
+    public void deleteLivreById(int id) throws RecordNotFoundException {
+        Optional<Livre> livreAEffacer = livreRepository.findById(id);
+        if(livreAEffacer.isPresent()) {
+            Livre livreTrouve = livreAEffacer.get();
+            livreRepository.deleteById(livreTrouve.getIdLivre());
+        } else {
+            throw new RecordNotFoundException("Pas de livre enregistré avec cet Id");
+        }
+    }
 
 
 
