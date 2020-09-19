@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-09-18T20:47:13+0200",
+    date = "2020-09-19T18:27:59+0200",
     comments = "version: 1.3.1.Final, compiler: javac, environment: Java 11.0.6 (Oracle Corporation)"
 )
 @Component
@@ -23,11 +23,17 @@ public class LivreMapperImpl implements LivreMapper {
 
         Livre livre = new Livre();
 
-        livre.setId( dto.getId() );
-        livre.setTitle( dto.getTitle() );
-        livre.setAuthor( dto.getAuthor() );
+        livre.setIdLivre( dto.getIdLivre() );
+        livre.setTitre( dto.getTitre() );
+        livre.setAuteur( dto.getAuteur() );
         livre.setPublication( dto.getPublication() );
         livre.setResume( dto.getResume() );
+        livre.setNombrePages( dto.getNombrePages() );
+        livre.setNomCategorie( dto.getNomCategorie() );
+        livre.setDateAchat( dto.getDateAchat() );
+        livre.setPrixLocation( dto.getPrixLocation() );
+        livre.setEtatLivre( dto.getEtatLivre() );
+        livre.setDisponibilite( dto.getDisponibilite() );
 
         return livre;
     }
@@ -40,11 +46,17 @@ public class LivreMapperImpl implements LivreMapper {
 
         LivreDTO livreDTO = new LivreDTO();
 
-        livreDTO.setId( entity.getId() );
-        livreDTO.setTitle( entity.getTitle() );
-        livreDTO.setAuthor( entity.getAuthor() );
+        livreDTO.setIdLivre( entity.getIdLivre() );
+        livreDTO.setTitre( entity.getTitre() );
+        livreDTO.setAuteur( entity.getAuteur() );
         livreDTO.setPublication( entity.getPublication() );
         livreDTO.setResume( entity.getResume() );
+        livreDTO.setNombrePages( entity.getNombrePages() );
+        livreDTO.setNomCategorie( entity.getNomCategorie() );
+        livreDTO.setDateAchat( entity.getDateAchat() );
+        livreDTO.setPrixLocation( entity.getPrixLocation() );
+        livreDTO.setEtatLivre( entity.getEtatLivre() );
+        livreDTO.setDisponibilite( entity.getDisponibilite() );
 
         return livreDTO;
     }
