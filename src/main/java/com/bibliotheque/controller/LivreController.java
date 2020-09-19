@@ -8,6 +8,7 @@ import com.bibliotheque.service.LivreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
@@ -53,6 +54,12 @@ public class LivreController {
         Livre livre=livreService.updateLivre(livreModifie);
         LivreDTO dto = livreMapper.toDto(livre);
         return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
+
+    /* controller pour effacer un livre de la base de données */
+    @RequestMapping(path = "/deleteLivre/{id}",method = RequestMethod.POST)
+    public void deleteLivreById(Model model, @PathVariable("id") int id) throws RecordNotFoundException{
+        livreService.deleteLivreById(id);
     }
 
 
