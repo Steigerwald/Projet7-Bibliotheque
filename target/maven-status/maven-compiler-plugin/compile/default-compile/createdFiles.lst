@@ -1,5 +1,7 @@
+com/bibliotheque/form/Search.class
 com/bibliotheque/entity/Reservation.class
 com/bibliotheque/controller/LivreController.class
+com/bibliotheque/entity/mapper/SearchMapper.class
 com/bibliotheque/entity/Role.class
 com/bibliotheque/entity/Livre.class
 com/bibliotheque/entity/dto/LivreDTO.class
@@ -7,8 +9,10 @@ com/bibliotheque/entity/User.class
 com/bibliotheque/EntityApplication.class
 com/bibliotheque/entity/mapper/LivreMapperImpl.class
 com/bibliotheque/repository/LivreRepository.class
+com/bibliotheque/entity/dto/SearchDTO.class
 com/bibliotheque/service/LivreService.class
 com/bibliotheque/entity/mapper/LivreMapper.class
+com/bibliotheque/entity/mapper/SearchMapperImpl.class
 com/bibliotheque/entity/Bibliotheque.class
 com/bibliotheque/entity/mapper/EntityMapper.class
 com/bibliotheque/exception/RecordNotFoundException.class

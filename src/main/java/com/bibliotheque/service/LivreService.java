@@ -2,6 +2,7 @@ package com.bibliotheque.service;
 
 import com.bibliotheque.entity.Livre;
 import com.bibliotheque.exception.RecordNotFoundException;
+import com.bibliotheque.form.Search;
 import com.bibliotheque.repository.LivreRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -96,7 +97,11 @@ public class LivreService {
     }
 
 
-
+    //Methode pour une recherche de livres
+    public List<Livre> getAllLivresBySearch(Search search){
+        List<Livre> listLivresTrouvesDeRecherche=livreRepository.findAllLivresByTitreOrAuteurOrNomCategorie(search.getTitre(),search.getAuteur(),search.getNomCategorie());
+        return listLivresTrouvesDeRecherche;
+    }
 
 
 }

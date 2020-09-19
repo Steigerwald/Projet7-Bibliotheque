@@ -3,11 +3,14 @@
 /Users/bricesteigerwald/IdeaProjects/Projet-7/src/main/java/com/bibliotheque/exception/RecordNotFoundException.java
 /Users/bricesteigerwald/IdeaProjects/Projet-7/src/main/java/com/bibliotheque/controller/LivreController.java
 /Users/bricesteigerwald/IdeaProjects/Projet-7/src/main/java/com/bibliotheque/service/LivreService.java
+/Users/bricesteigerwald/IdeaProjects/Projet-7/src/main/java/com/bibliotheque/form/Search.java
 /Users/bricesteigerwald/IdeaProjects/Projet-7/src/main/java/com/bibliotheque/EntityApplication.java
 /Users/bricesteigerwald/IdeaProjects/Projet-7/src/main/java/com/bibliotheque/entity/User.java
 /Users/bricesteigerwald/IdeaProjects/Projet-7/src/main/java/com/bibliotheque/entity/mapper/EntityMapper.java
 /Users/bricesteigerwald/IdeaProjects/Projet-7/src/main/java/com/bibliotheque/entity/Livre.java
 /Users/bricesteigerwald/IdeaProjects/Projet-7/src/main/java/com/bibliotheque/repository/LivreRepository.java
+/Users/bricesteigerwald/IdeaProjects/Projet-7/src/main/java/com/bibliotheque/entity/dto/SearchDTO.java
 /Users/bricesteigerwald/IdeaProjects/Projet-7/src/main/java/com/bibliotheque/entity/Bibliotheque.java
 /Users/bricesteigerwald/IdeaProjects/Projet-7/src/main/java/com/bibliotheque/entity/Reservation.java
+/Users/bricesteigerwald/IdeaProjects/Projet-7/src/main/java/com/bibliotheque/entity/mapper/SearchMapper.java
 /Users/bricesteigerwald/IdeaProjects/Projet-7/src/main/java/com/bibliotheque/entity/mapper/LivreMapper.java

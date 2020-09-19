@@ -2,8 +2,11 @@ package com.bibliotheque.controller;
 
 import com.bibliotheque.entity.Livre;
 import com.bibliotheque.entity.dto.LivreDTO;
+import com.bibliotheque.entity.dto.SearchDTO;
 import com.bibliotheque.entity.mapper.LivreMapper;
+import com.bibliotheque.entity.mapper.SearchMapper;
 import com.bibliotheque.exception.RecordNotFoundException;
+import com.bibliotheque.form.Search;
 import com.bibliotheque.service.LivreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +26,10 @@ public class LivreController {
 
     @Autowired
     LivreMapper livreMapper;
+
+    @Autowired
+    SearchMapper searchMapper;
+
 
     /* controller pour avoir tous les livres*/
     @RequestMapping("/")
@@ -60,6 +67,19 @@ public class LivreController {
     @RequestMapping(path = "/deleteLivre/{id}",method = RequestMethod.POST)
     public void deleteLivreById(Model model, @PathVariable("id") int id) throws RecordNotFoundException{
         livreService.deleteLivreById(id);
+    }
+
+
+    /* Controller pour chercher un livre par titre ou par auteur ou par nom de categorie */
+    @RequestMapping(path = "/searchLivres", method = RequestMethod.POST,produces = "application/json")
+    public ResponseEntity<List<LivreDTO> >searchLivresByTitreOrByAuteurOrByNomCategorie(@RequestBody SearchDTO searchDTO) {
+        Search search=searchMapper.toEntity(searchDTO);
+        List<Livre> listLivresTrouves = livreService.getAllLivresBySearch(search);
+        if (listLivresTrouves.size()==0){
+            return null;
+        } else{
+            return new ResponseEntity<>(livreMapper.toDto(listLivresTrouves),HttpStatus.OK);
+        }
     }
 
 
