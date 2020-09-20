@@ -55,7 +55,7 @@ public class BibliothequeService {
     public Bibliotheque updateBibliotheque(Bibliotheque entity) throws RecordNotFoundException {
         Bibliotheque bibliothequeAModifier = findById(entity.getIdBibliotheque());
         if (bibliothequeAModifier != null) {
-            logger.info(" l'entité bibliotheque à modifier a été trouvée et peut être modifiée");
+            logger.info(" l'entité bibliotheque à modifier a été trouvée et peut être modifiée et l'Id est: "+bibliothequeAModifier.getIdBibliotheque());
             bibliothequeAModifier.setNomBibliotheque(entity.getNomBibliotheque());
             bibliothequeAModifier.setLieu(entity.getLieu());
             bibliothequeAModifier.setAdresse(entity.getAdresse());

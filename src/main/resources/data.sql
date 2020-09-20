@@ -3,7 +3,7 @@ USE bibliotheques;
 SET FOREIGN_KEY_CHECKS=0;
 
 TRUNCATE TABLE bibliotheques.TBL_LIVRE;
-
+TRUNCATE TABLE bibliotheques.TBL_BIBLIOTHEQUE;
 
 INSERT INTO bibliotheques.TBL_LIVRE (id_livre,titre, auteur, publication,resume,nombre_pages,nom_categorie,date_achat,prix_location,etat_livre,disponibilite) VALUES
 (1, 'Dune','FRANK HERBERT', '2018-04-28 02:45:30','livre de science fiction inspirée des space opéras et qui mélangent l"action, les intrigues et amour',320,'Science Fiction','2018-04-28 02:45:30',10,'neuf',true),
@@ -18,6 +18,12 @@ INSERT INTO bibliotheques.TBL_LIVRE (id_livre,titre, auteur, publication,resume,
 (10, 'SAN ANTONIO Oeuvres Complètes Tome 2','FREDERIC DART', '1980-04-28 02:45:30','livre de 5 histoires de San Antonio',635,'Policier','1980-04-28 02:45:30',20,'vieux',true),
 (11, 'Dune','FRANK HERBERT', '2018-06-28 02:45:30','livre de science fiction inspirée des space opéras et qui mélangent l"action, les intrigues et amour',320,'Science Fiction','2018-06-28 02:45:30',10,'neuf',false),
 (12, 'Dune','FRANK HERBERT', '2018-05-28 02:45:30','livre de science fiction inspirée des space opéras et qui mélangent l"action, les intrigues et amour',320,'Science Fiction','2018-05-28 02:45:30',10,'normal',false);
+
+
+INSERT INTO bibliotheques.TBL_BIBLIOTHEQUE (id_bibliotheque, adresse, lieu, nom_bibliotheque) VALUES
+(1, '140 AVENUE CHARLES DE GAULLE', 'BRUGES', 'ESPACE DE BRUGES'),
+(2, '38 RUE EMILE COUDORD', 'BORDEAUX', 'ESPACE CULTUREL DE BORDEAUX'),
+(3, '50 AVENUE GENERAL LECLERC', 'LE BOUSCAT', 'TECHNOSPACE CULTUREL');
 
 
 

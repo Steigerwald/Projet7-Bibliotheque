@@ -12,7 +12,7 @@ public class Bibliotheque {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="ID_BIBLIOTHEQUE")
-    private int IdBibliotheque;
+    private int idBibliotheque;
 
     @Column(name="NOM_BIBLIOTHEQUE")
     private String nomBibliotheque;
@@ -31,7 +31,7 @@ public class Bibliotheque {
 
     // getters
     public int getIdBibliotheque() {
-        return IdBibliotheque;
+        return idBibliotheque;
     }
 
     public String getNomBibliotheque() {
@@ -49,7 +49,7 @@ public class Bibliotheque {
 
     // setters
     public void setIdBibliotheque(int idBibliotheque) {
-        IdBibliotheque = idBibliotheque;
+        this.idBibliotheque = idBibliotheque;
     }
 
     public void setNomBibliotheque(String nomBibliotheque) {
