@@ -5,16 +5,16 @@ import java.util.Date;
 
 @Data
 public class LivreDTO {
-    public int idLivre;
-    public String titre;
-    public String auteur;
-    public Date publication;
-    public String resume;
-    public String nombrePages;
-    public String nomCategorie;
-    public Date dateAchat;
-    public int prixLocation;
-    public String etatLivre;
-    public Boolean disponibilite;
+    private int idLivre;
+    private String titre;
+    private String auteur;
+    private Date publication;
+    private String resume;
+    private String nombrePages;
+    private String nomCategorie;
+    private Date dateAchat;
+    private int prixLocation;
+    private String etatLivre;
+    private Boolean disponibilite;
 
 }

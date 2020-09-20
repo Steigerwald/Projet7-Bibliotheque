@@ -6,6 +6,7 @@ com/bibliotheque/entity/dto/LivreDTO.class
 com/bibliotheque/EntityApplication.class
 com/bibliotheque/entity/mapper/LivreMapperImpl.class
 com/bibliotheque/entity/dto/SearchDTO.class
+com/bibliotheque/service/ReservationService.class
 com/bibliotheque/repository/BibliothequeRepository.class
 com/bibliotheque/service/LivreService.class
 com/bibliotheque/entity/mapper/LivreMapper.class
@@ -14,9 +15,14 @@ com/bibliotheque/controller/BibliothequeController.class
 com/bibliotheque/entity/mapper/BibliothequeMapper.class
 com/bibliotheque/controller/LivreController.class
 com/bibliotheque/entity/mapper/SearchMapper.class
+com/bibliotheque/controller/ReservationController.class
 com/bibliotheque/entity/dto/BibliothequeDTO.class
+com/bibliotheque/entity/dto/ReservationDTO.class
+com/bibliotheque/entity/mapper/ReservationMapper.class
 com/bibliotheque/entity/User.class
+com/bibliotheque/repository/ReservationRepository.class
 com/bibliotheque/repository/LivreRepository.class
+com/bibliotheque/entity/mapper/ReservationMapperImpl.class
 com/bibliotheque/entity/mapper/SearchMapperImpl.class
 com/bibliotheque/service/BibliothequeService.class
 com/bibliotheque/entity/mapper/BibliothequeMapperImpl.class

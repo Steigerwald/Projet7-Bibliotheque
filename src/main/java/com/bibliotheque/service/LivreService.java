@@ -1,6 +1,7 @@
 package com.bibliotheque.service;
 
 import com.bibliotheque.entity.Livre;
+import com.bibliotheque.entity.dto.LivreDTO;
 import com.bibliotheque.exception.RecordNotFoundException;
 import com.bibliotheque.form.Search;
 import com.bibliotheque.repository.LivreRepository;
@@ -57,23 +58,12 @@ public class LivreService {
     }
 
     /*Methode pour creer un livre dans la base de données*/
-    public Livre CreateLivre(Livre entity) throws RecordNotFoundException {
-        Livre newLivre = new Livre();
+    public Livre createLivre(Livre entity) throws RecordNotFoundException {
         logger.info(" retour de la valeur de l'entité entity de CreateLivre" + entity);
-        newLivre.setTitre(entity.getTitre());
-        newLivre.setAuteur(entity.getAuteur());
-        newLivre.setPublication(entity.getPublication());
-        newLivre.setResume(entity.getResume());
-        newLivre.setNombrePages(entity.getNombrePages());
-        newLivre.setNomCategorie(entity.getNomCategorie());
-        newLivre.setDateAchat(entity.getDateAchat());
-        newLivre.setPrixLocation(entity.getPrixLocation());
-        newLivre.setEtatLivre(entity.getEtatLivre());
-        newLivre.setDisponibilite(true);
+        entity.setDisponibilite(true);
         //enregistrement du livre dans la basse de données
-        entity = livreRepository.save(newLivre);
         logger.info(" retour de l'entité newLivre de createLivre qui a été créée et sauvegardée");
-        return entity;
+        return livreRepository.save(entity);
     }
 
 
@@ -82,23 +72,8 @@ public class LivreService {
         Livre livreAModifier = findById(entity.getIdLivre());
         if(livreAModifier!=null) {
             logger.info(" l'entité livre à modifier a été trouvée et peut être modifiée");
-            livreAModifier.setTitre(entity.getTitre());
-            livreAModifier.setAuteur(entity.getAuteur());
-            livreAModifier.setPublication(entity.getPublication());
-            livreAModifier.setResume(entity.getResume());
-            livreAModifier.setNombrePages(entity.getNombrePages());
-            livreAModifier.setNomCategorie(entity.getNomCategorie());
-            livreAModifier.setDateAchat(entity.getDateAchat());
-            livreAModifier.setPrixLocation(entity.getPrixLocation());
-            livreAModifier.setEtatLivre(entity.getEtatLivre());
-            livreAModifier.setDisponibilite(entity.getDisponibilite());
-            /*
-            livreAModifier.setBibliotheque(entity.getBibliotheque());
-            livreAModifier.setReservation(entity.getReservation());
-            */
-            livreAModifier=livreRepository.save(livreAModifier);
             logger.info(" retour de la nouvelle entité site de UpdateLivre qui a été sauvegardée et le livreAModifier était existant");
-            return livreAModifier;
+            return livreRepository.save(entity);
         } else {
             throw new RecordNotFoundException("Pas de livre trouvé avec l'id de l'entité et il ne peut être modifié");
         }
@@ -118,8 +93,7 @@ public class LivreService {
 
     /*Methode pour une recherche de livres*/
     public List<Livre> getAllLivresBySearch(Search search){
-        List<Livre> listLivresTrouvesDeRecherche=livreRepository.findAllLivresByTitreOrAuteurOrNomCategorie(search.getTitre(),search.getAuteur(),search.getNomCategorie());
-        return listLivresTrouvesDeRecherche;
+        return livreRepository.findAllLivresByTitreOrAuteurOrNomCategorie(search.getTitre(),search.getAuteur(),search.getNomCategorie());
     }
 
     /*Methode pour obtenir tous les exemplaires disponibles d'un livre par titre */

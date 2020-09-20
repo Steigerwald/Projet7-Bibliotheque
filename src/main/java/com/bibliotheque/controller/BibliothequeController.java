@@ -28,19 +28,17 @@ public class BibliothequeController {
     /* controller pour avoir toutes les bibliotheques*/
     @RequestMapping("/")
     public List<Bibliotheque> listOfBibliotheques() {
-        List<Bibliotheque> bibliotheque = this.bibliothequeService.findAll();
-        return bibliotheque;
+        return bibliothequeService.findAll();
     }
 
     /* controller pour obtenir une bibliotheque */
     @RequestMapping("/{id}")
     public Bibliotheque bibliothequeId(@PathVariable int id) {
-        Bibliotheque bibliotheque = this.bibliothequeService.findById(id);
-        return bibliotheque;
+        return bibliothequeService.findById(id);
     }
 
     /* controller pour ajouter une bibliotheque */
-    @PostMapping("/addBibliotheque")
+    @RequestMapping(path = "/addBibliotheque",method = RequestMethod.POST,produces = "application/json")
     public ResponseEntity<BibliothequeDTO> newBibliotheque(@RequestBody BibliothequeDTO bibliothequeDTO) throws RecordNotFoundException {
         System.out.println("bibliotheque => " + bibliothequeMapper.toEntity(bibliothequeDTO));
         Bibliotheque bibliotheque =bibliothequeService.createBibliotheque(bibliothequeMapper.toEntity(bibliothequeDTO));
@@ -48,15 +46,16 @@ public class BibliothequeController {
     }
 
     /* controller pour modifier une bibliotheque */
-    @RequestMapping(path = "/updateBibliotheque",method = RequestMethod.POST,produces = "application/json")
+    @RequestMapping(path = "/updateBibliotheque",method = RequestMethod.PUT,produces = "application/json")
     public ResponseEntity<BibliothequeDTO> updateBibliotheque(@RequestBody BibliothequeDTO bibliothequeModifieDTO) throws RecordNotFoundException {
         Bibliotheque bibliothequeModifie = bibliothequeMapper.toEntity(bibliothequeModifieDTO);
         Bibliotheque bibliotheque=bibliothequeService.updateBibliotheque(bibliothequeModifie);
         BibliothequeDTO dto = bibliothequeMapper.toDto(bibliotheque);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
+
     /* controller pour effacer un livre de la base de données */
-    @RequestMapping(path = "/deleteBibliotheque/{id}",method = RequestMethod.POST)
+    @RequestMapping(path = "/deleteBibliotheque/{id}",method = RequestMethod.DELETE)
     public void deleteBibliothequeById(Model model, @PathVariable("id") int id) throws RecordNotFoundException{
         bibliothequeService.deleteBibliothequeById(id);
     }

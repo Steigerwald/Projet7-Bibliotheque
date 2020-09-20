@@ -33,15 +33,13 @@ public class LivreController {
     /* controller pour avoir tous les livres*/
     @RequestMapping("/")
     public List<Livre> listOfBooks() {
-        List<Livre> livre = this.livreService.findAll();
-        return livre;
+        return livreService.findAll();
     }
 
     /* controller pour obtenir un livre */
     @RequestMapping("/{id}")
     public Livre bookId(@PathVariable int id) {
-        Livre livre = this.livreService.findById(id);
-        return livre;
+        return livreService.findById(id);
     }
 
     /* Controller pour la liste de tous les livres disponibles */
@@ -51,15 +49,15 @@ public class LivreController {
     }
 
     /* controller pour ajouter un livre */
-    @PostMapping("/addLivre")
+    @RequestMapping(path = "/addLivre",method = RequestMethod.POST,produces = "application/json")
     public ResponseEntity<LivreDTO> newBook(@RequestBody LivreDTO livreDTO) throws RecordNotFoundException {
         System.out.println("livre => " + livreMapper.toEntity(livreDTO));
-        Livre livre =livreService.CreateLivre(livreMapper.toEntity(livreDTO));
+        Livre livre =livreService.createLivre(livreMapper.toEntity(livreDTO));
         return new ResponseEntity<>(livreMapper.toDto(livre), HttpStatus.OK);
     }
 
     /* controller pour modifier un livre */
-    @RequestMapping(path = "/updateLivre",method = RequestMethod.POST,produces = "application/json")
+    @RequestMapping(path = "/updateLivre",method = RequestMethod.PUT,produces = "application/json")
     public ResponseEntity<LivreDTO> updateLivre(@RequestBody LivreDTO livreModifieDTO) throws RecordNotFoundException {
         Livre livreModifie = livreMapper.toEntity(livreModifieDTO);
         Livre livre=livreService.updateLivre(livreModifie);
@@ -68,11 +66,10 @@ public class LivreController {
     }
 
     /* controller pour effacer un livre de la base de données */
-    @RequestMapping(path = "/deleteLivre/{id}",method = RequestMethod.POST)
+    @RequestMapping(path = "/deleteLivre/{id}",method = RequestMethod.DELETE)
     public void deleteLivreById(Model model, @PathVariable("id") int id) throws RecordNotFoundException{
         livreService.deleteLivreById(id);
     }
-
 
     /* Controller pour chercher un livre par titre ou par auteur ou par nom de categorie */
     @RequestMapping(path = "/searchLivres", method = RequestMethod.POST,produces = "application/json")

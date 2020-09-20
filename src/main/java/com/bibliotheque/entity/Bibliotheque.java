@@ -28,39 +28,4 @@ public class Bibliotheque {
     public Bibliotheque() {
     }
 
-
-    // getters
-    public int getIdBibliotheque() {
-        return idBibliotheque;
-    }
-
-    public String getNomBibliotheque() {
-        return nomBibliotheque;
-    }
-
-    public String getLieu() {
-        return lieu;
-    }
-
-    public String getAdresse() {
-        return adresse;
-    }
-
-
-    // setters
-    public void setIdBibliotheque(int idBibliotheque) {
-        this.idBibliotheque = idBibliotheque;
-    }
-
-    public void setNomBibliotheque(String nomBibliotheque) {
-        this.nomBibliotheque = nomBibliotheque;
-    }
-
-    public void setLieu(String lieu) {
-        this.lieu = lieu;
-    }
-
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
-    }
 }

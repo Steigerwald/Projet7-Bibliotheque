@@ -8,10 +8,10 @@ import java.util.Date;
 @Data
 public class ReservationDTO {
 
-    public int idReservation;
-    public String etatReservation;
-    public Date dateReservation;
-    public Date dateDeRetrait;
-    public int delaiDeLocation;
-    public Boolean isactif;
+    private int idReservation;
+    private String etatReservation;
+    private Date dateReservation;
+    private Date dateDeRetrait;
+    private int delaiDeLocation;
+    private Boolean isactif;
 }

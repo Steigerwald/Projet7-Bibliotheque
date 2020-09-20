@@ -4,6 +4,7 @@ SET FOREIGN_KEY_CHECKS=0;
 
 TRUNCATE TABLE bibliotheques.TBL_LIVRE;
 TRUNCATE TABLE bibliotheques.TBL_BIBLIOTHEQUE;
+TRUNCATE TABLE bibliotheques.TBL_RESERVATION;
 
 INSERT INTO bibliotheques.TBL_LIVRE (id_livre,titre, auteur, publication,resume,nombre_pages,nom_categorie,date_achat,prix_location,etat_livre,disponibilite) VALUES
 (1, 'Dune','FRANK HERBERT', '2018-04-28 02:45:30','livre de science fiction inspirée des space opéras et qui mélangent l"action, les intrigues et amour',320,'Science Fiction','2018-04-28 02:45:30',10,'neuf',true),
@@ -24,6 +25,13 @@ INSERT INTO bibliotheques.TBL_BIBLIOTHEQUE (id_bibliotheque, adresse, lieu, nom_
 (1, '140 AVENUE CHARLES DE GAULLE', 'BRUGES', 'ESPACE DE BRUGES'),
 (2, '38 RUE EMILE COUDORD', 'BORDEAUX', 'ESPACE CULTUREL DE BORDEAUX'),
 (3, '50 AVENUE GENERAL LECLERC', 'LE BOUSCAT', 'TECHNOSPACE CULTUREL');
+
+
+INSERT INTO bibliotheques.TBL_RESERVATION (id_reservation, date_retrait, date_reservation,delai_location,etat_reservation,isactif) VALUES
+(1,'2020-06-28 02:45:30','2020-06-20 02:45:30',15,'en cours de pret',true),
+(2,'2020-07-20 02:45:30','2020-07-15 02:45:30',15,'en cours de pret',true),
+(3,'2020-05-28 02:45:30','2020-05-20 02:45:30',15,'en cours de pret',true),
+(4,'2020-07-27 02:45:30','2020-07-20 02:45:30',15,'en cours de pret',true);
 
 
 

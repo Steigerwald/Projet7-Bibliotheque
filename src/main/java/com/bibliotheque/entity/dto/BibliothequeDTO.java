@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class BibliothequeDTO {
-    public int idBibliotheque;
-    public String nomBibliotheque;
-    public String lieu;
-    public String adresse;
+    private int idBibliotheque;
+    private String nomBibliotheque;
+    private String lieu;
+    private String adresse;
 }
