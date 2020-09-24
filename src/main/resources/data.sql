@@ -5,6 +5,9 @@ SET FOREIGN_KEY_CHECKS=0;
 TRUNCATE TABLE bibliotheques.TBL_LIVRE;
 TRUNCATE TABLE bibliotheques.TBL_BIBLIOTHEQUE;
 TRUNCATE TABLE bibliotheques.TBL_RESERVATION;
+TRUNCATE TABLE bibliotheques.TBL_USER;
+TRUNCATE TABLE bibliotheques.TBL_ROLE;
+
 
 INSERT INTO bibliotheques.TBL_LIVRE (id_livre,titre, auteur, publication,resume,nombre_pages,nom_categorie,date_achat,prix_location,etat_livre,disponibilite) VALUES
 (1, 'Dune','FRANK HERBERT', '2018-04-28 02:45:30','livre de science fiction inspirée des space opéras et qui mélangent l"action, les intrigues et amour',320,'Science Fiction','2018-04-28 02:45:30',10,'neuf',true),
@@ -33,6 +36,16 @@ INSERT INTO bibliotheques.TBL_RESERVATION (id_reservation, date_retrait, date_re
 (3,'2020-05-28 02:45:30','2020-05-20 02:45:30',15,'en cours de pret',true),
 (4,'2020-07-27 02:45:30','2020-07-20 02:45:30',15,'en cours de pret',true);
 
+INSERT INTO bibliotheques.TBL_USER (id_user,actif_user, mail_user, mot_passe, nom_user,prenom_user) VALUES
+(1,true, 'admin@gmail.com', '$2a$10$GQXfIS9n2oJuE1lVI70yFeu5iJn/PEm5B0CUrfGEUT7bSRcsuqCnS', 'Steigerwald','Brice'),
+(2,true, 'user@gmail.com', '$2a$10$GQXfIS9n2oJuE1lVI70yFeu5iJn/PEm5B0CUrfGEUT7bSRcsuqCnS', 'Steigerwald','Jacques'),
+(3,true, 'tara@gmail.com', '$2a$10$GQXfIS9n2oJuE1lVI70yFeu5iJn/PEm5B0CUrfGEUT7bSRcsuqCnS', 'Hot','Tara'),
+(4,true, 'jean@gmail.com', '$2a$10$GQXfIS9n2oJuE1lVI70yFeu5iJn/PEm5B0CUrfGEUT7bSRcsuqCnS', 'Pierre','Jean'),
+(5,true, 'anne@gmail.com', '$2a$10$GQXfIS9n2oJuE1lVI70yFeu5iJn/PEm5B0CUrfGEUT7bSRcsuqCnS', 'Priska','Anne');
+
+INSERT INTO bibliotheques.TBL_ROLE (id_role, actif_role,nom_role) VALUES
+(1,true, 'ROLE_ADMIN'),
+(2,true, 'ROLE_USER');
 
 
 SET FOREIGN_KEY_CHECKS=1;
