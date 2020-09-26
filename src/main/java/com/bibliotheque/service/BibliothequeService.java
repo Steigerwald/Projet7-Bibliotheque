@@ -1,7 +1,6 @@
 package com.bibliotheque.service;
 
 import com.bibliotheque.entity.Bibliotheque;
-import com.bibliotheque.entity.Livre;
 import com.bibliotheque.exception.RecordNotFoundException;
 import com.bibliotheque.repository.BibliothequeRepository;
 import org.slf4j.Logger;

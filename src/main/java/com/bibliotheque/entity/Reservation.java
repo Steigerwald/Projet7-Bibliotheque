@@ -1,10 +1,10 @@
 package com.bibliotheque.entity;
 
-
 import lombok.Data;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Date;
 
 @Entity
@@ -34,6 +34,12 @@ public class Reservation {
 
     @Column(name="ISACTIF")
     private Boolean isactif;
+
+    @ManyToOne(cascade = {CascadeType.ALL})
+    private User user;
+
+    @OneToMany(mappedBy = "reservation",fetch=FetchType.LAZY,orphanRemoval=true)
+    private Collection<Livre> livres;
 
     // Constructeur
 

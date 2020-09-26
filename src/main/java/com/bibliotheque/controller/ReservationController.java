@@ -25,14 +25,16 @@ public class ReservationController {
 
     /* controller pour avoir toutes les reservations*/
     @RequestMapping("/")
-    public List<Reservation> listOfReservations() {
-        return reservationService.findAll();
+    public ResponseEntity<List<ReservationDTO> >listOfReservations() {
+        List<Reservation> toutesReservations =reservationService.findAll();
+        return new ResponseEntity<>(reservationMapper.toDto(toutesReservations), HttpStatus.OK);
     }
 
     /* controller pour obtenir une reservation */
     @RequestMapping("/{id}")
-    public Reservation reservationId(@PathVariable int id) {
-        return reservationService.findById(id);
+    public ResponseEntity<ReservationDTO> reservationId(@PathVariable int id) {
+        Reservation laReservation =reservationService.findById(id);
+        return new ResponseEntity<>(reservationMapper.toDto(laReservation), HttpStatus.OK);
     }
 
     /* controller pour ajouter une reservation */

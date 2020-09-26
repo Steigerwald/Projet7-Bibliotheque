@@ -31,21 +31,24 @@ public class LivreController {
 
 
     /* controller pour avoir tous les livres*/
-    @RequestMapping("/")
-    public List<Livre> listOfBooks() {
-        return livreService.findAll();
+    @RequestMapping(path ="/",method = RequestMethod.GET)
+    public ResponseEntity<List<LivreDTO> >listOfBooks() {
+        List<Livre> tousLivres=livreService.findAll();
+        return new ResponseEntity<>(livreMapper.toDto(tousLivres), HttpStatus.OK);
     }
 
     /* controller pour obtenir un livre */
-    @RequestMapping("/{id}")
-    public Livre bookId(@PathVariable int id) {
-        return livreService.findById(id);
+    @RequestMapping(path="/{id}",method = RequestMethod.GET)
+    public ResponseEntity <LivreDTO> bookId(@PathVariable int id) {
+        Livre leLivre =livreService.findById(id);
+        return new ResponseEntity<>(livreMapper.toDto(leLivre), HttpStatus.OK);
     }
 
     /* Controller pour la liste de tous les livres disponibles */
     @RequestMapping(path ="/disponibles",method = RequestMethod.GET)
-    public List<Livre> getAllLivresDisponibles() {
-        return livreService.getAllLivresDisponibles();
+    public ResponseEntity <List<LivreDTO>> getAllLivresDisponibles() {
+        List<Livre> LivresDispo = livreService.getAllLivresDisponibles();
+        return new ResponseEntity<>(livreMapper.toDto(LivresDispo), HttpStatus.OK);
     }
 
     /* controller pour ajouter un livre */

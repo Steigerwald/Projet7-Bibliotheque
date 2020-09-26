@@ -27,14 +27,16 @@ public class BibliothequeController {
 
     /* controller pour avoir toutes les bibliotheques*/
     @RequestMapping("/")
-    public List<Bibliotheque> listOfBibliotheques() {
-        return bibliothequeService.findAll();
+    public ResponseEntity<List<BibliothequeDTO>> listOfBibliotheques() {
+        List<Bibliotheque> toutesBibliotheques= bibliothequeService.findAll();
+        return new ResponseEntity<>(bibliothequeMapper.toDto(toutesBibliotheques), HttpStatus.OK);
     }
 
     /* controller pour obtenir une bibliotheque */
     @RequestMapping("/{id}")
-    public Bibliotheque bibliothequeId(@PathVariable int id) {
-        return bibliothequeService.findById(id);
+    public ResponseEntity<BibliothequeDTO> bibliothequeId(@PathVariable int id) {
+        Bibliotheque laBibliotheque= bibliothequeService.findById(id);
+        return new ResponseEntity<>(bibliothequeMapper.toDto(laBibliotheque), HttpStatus.OK);
     }
 
     /* controller pour ajouter une bibliotheque */

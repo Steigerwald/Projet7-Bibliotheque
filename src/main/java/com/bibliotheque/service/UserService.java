@@ -1,5 +1,6 @@
 package com.bibliotheque.service;
 
+import com.bibliotheque.entity.Livre;
 import com.bibliotheque.entity.Role;
 import com.bibliotheque.entity.User;
 import com.bibliotheque.exception.RecordNotFoundException;
@@ -67,19 +68,19 @@ public class UserService {
 
 
     /*Methode pour sauvegarder dans une base de données un User*/
-    public void saveUser (User user) {
+    public User saveUser (User user) {
         user.setMotDePasse(passwordEncoder.encode(user.getMotDePasse()));
         user.setActifUser(true);
         logger.info(" récupération du mot de passe et l'encode pour l'enregistrer");
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
     /*Methode pour modifier un User*/
-    public void updateUser (User user) throws RecordNotFoundException {
+    public User updateUser (User user) throws RecordNotFoundException {
         Optional<User> userAModifier = userRepository.findByIdUser(user.getIdUser());
         if(userAModifier.isPresent())
         { logger.info(" l'entité user à modifier a été trouvée et peut être modifiée");
-            userRepository.save(user);
+            return userRepository.save(user);
         } else {
             throw new RecordNotFoundException("Pas d'entité User enregistrée avec cet Id et elle ne peut pas être modifiée");
         }
@@ -95,4 +96,31 @@ public class UserService {
             throw new RecordNotFoundException("Pas de role enregistré avec cet Id");
         }
     }
+
+
+    /*Methode pour effacer un user dans la base de données*/
+    public void deleteUserById(int id) throws RecordNotFoundException {
+        Optional<User> userAEffacer = userRepository.findById(id);
+        if(userAEffacer.isPresent()) {
+            User userTrouve = userAEffacer.get();
+            userRepository.deleteById(userTrouve.getIdUser());
+        } else {
+            throw new RecordNotFoundException("Pas de livre enregistré avec cet Id");
+        }
+    }
+
+    /*Methode pour désactiver un user dans la base de données*/
+    public void desactiveUserById(int id) throws RecordNotFoundException {
+        Optional<User> userADesactiver = userRepository.findById(id);
+        if(userADesactiver.isPresent()) {
+            User userTrouve = userADesactiver.get();
+            userTrouve.setActifUser(false);
+            updateUser(userTrouve);
+        } else {
+            throw new RecordNotFoundException("Pas de livre enregistré avec cet Id");
+        }
+    }
+
+
+
 }

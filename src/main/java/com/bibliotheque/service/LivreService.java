@@ -1,7 +1,6 @@
 package com.bibliotheque.service;
 
 import com.bibliotheque.entity.Livre;
-import com.bibliotheque.entity.dto.LivreDTO;
 import com.bibliotheque.exception.RecordNotFoundException;
 import com.bibliotheque.form.Search;
 import com.bibliotheque.repository.LivreRepository;
@@ -24,9 +23,8 @@ public class LivreService {
     LivreRepository livreRepository;
 
     /*Methode pour avoir tous les livres de la base de données*/
-    public List<Livre> findAll() {
-        return livreRepository.findAll();
-    }
+    public List<Livre> findAll() { return livreRepository.findAll(); }
+
 
     /*Methode pour trouver par son id un livre dans la base de données*/
     public Livre findById(int id) {

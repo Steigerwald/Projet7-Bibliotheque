@@ -2,6 +2,7 @@ package com.bibliotheque.entity;
 
 
 import lombok.Data;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -45,6 +46,9 @@ public class Livre {
     @Column(name="DISPONIBILITE")
     private Boolean disponibilite;
 
+    @ManyToOne(fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
+    @Nullable
+    private Reservation reservation;
 
 
     // Constructeur
