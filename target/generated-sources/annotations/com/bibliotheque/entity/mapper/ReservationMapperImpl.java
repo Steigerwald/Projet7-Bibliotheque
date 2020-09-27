@@ -1,10 +1,8 @@
 package com.bibliotheque.entity.mapper;
 
-import com.bibliotheque.entity.Livre;
 import com.bibliotheque.entity.Reservation;
 import com.bibliotheque.entity.Role;
 import com.bibliotheque.entity.User;
-import com.bibliotheque.entity.dto.LivreDTO;
 import com.bibliotheque.entity.dto.ReservationDTO;
 import com.bibliotheque.entity.dto.RoleDTO;
 import com.bibliotheque.entity.dto.UserDTO;
@@ -15,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-09-27T23:39:27+0200",
+    date = "2020-09-27T23:57:44+0200",
     comments = "version: 1.3.1.Final, compiler: javac, environment: Java 11.0.6 (Oracle Corporation)"
 )
 @Component
@@ -36,7 +34,6 @@ public class ReservationMapperImpl implements ReservationMapper {
         reservation.setDelaiDeLocation( dto.getDelaiDeLocation() );
         reservation.setIsactif( dto.getIsactif() );
         reservation.setUser( userDTOToUser( dto.getUser() ) );
-        reservation.setLivres( livreDTOListToLivreList( dto.getLivres() ) );
 
         return reservation;
     }
@@ -56,7 +53,6 @@ public class ReservationMapperImpl implements ReservationMapper {
         reservationDTO.setDelaiDeLocation( entity.getDelaiDeLocation() );
         reservationDTO.setIsactif( entity.getIsactif() );
         reservationDTO.setUser( userToUserDTO( entity.getUser() ) );
-        reservationDTO.setLivres( livreListToLivreDTOList( entity.getLivres() ) );
 
         return reservationDTO;
     }
@@ -89,19 +85,6 @@ public class ReservationMapperImpl implements ReservationMapper {
         return list;
     }
 
-    protected List<User> userDTOListToUserList(List<UserDTO> list) {
-        if ( list == null ) {
-            return null;
-        }
-
-        List<User> list1 = new ArrayList<User>( list.size() );
-        for ( UserDTO userDTO : list ) {
-            list1.add( userDTOToUser( userDTO ) );
-        }
-
-        return list1;
-    }
-
     protected Role roleDTOToRole(RoleDTO roleDTO) {
         if ( roleDTO == null ) {
             return null;
@@ -112,7 +95,6 @@ public class ReservationMapperImpl implements ReservationMapper {
         role.setIdRole( roleDTO.getIdRole() );
         role.setNomRole( roleDTO.getNomRole() );
         role.setActifRole( roleDTO.getActifRole() );
-        role.setUsers( userDTOListToUserList( roleDTO.getUsers() ) );
 
         return role;
     }
@@ -131,58 +113,8 @@ public class ReservationMapperImpl implements ReservationMapper {
         user.setMotDePasse( userDTO.getMotDePasse() );
         user.setActifUser( userDTO.getActifUser() );
         user.setRole( roleDTOToRole( userDTO.getRole() ) );
-        user.setReservations( toEntity( userDTO.getReservations() ) );
 
         return user;
-    }
-
-    protected Livre livreDTOToLivre(LivreDTO livreDTO) {
-        if ( livreDTO == null ) {
-            return null;
-        }
-
-        Livre livre = new Livre();
-
-        livre.setIdLivre( livreDTO.getIdLivre() );
-        livre.setTitre( livreDTO.getTitre() );
-        livre.setAuteur( livreDTO.getAuteur() );
-        livre.setPublication( livreDTO.getPublication() );
-        livre.setResume( livreDTO.getResume() );
-        livre.setNombrePages( livreDTO.getNombrePages() );
-        livre.setNomCategorie( livreDTO.getNomCategorie() );
-        livre.setDateAchat( livreDTO.getDateAchat() );
-        livre.setPrixLocation( livreDTO.getPrixLocation() );
-        livre.setEtatLivre( livreDTO.getEtatLivre() );
-        livre.setDisponibilite( livreDTO.getDisponibilite() );
-        livre.setReservation( toEntity( livreDTO.getReservation() ) );
-
-        return livre;
-    }
-
-    protected List<Livre> livreDTOListToLivreList(List<LivreDTO> list) {
-        if ( list == null ) {
-            return null;
-        }
-
-        List<Livre> list1 = new ArrayList<Livre>( list.size() );
-        for ( LivreDTO livreDTO : list ) {
-            list1.add( livreDTOToLivre( livreDTO ) );
-        }
-
-        return list1;
-    }
-
-    protected List<UserDTO> userListToUserDTOList(List<User> list) {
-        if ( list == null ) {
-            return null;
-        }
-
-        List<UserDTO> list1 = new ArrayList<UserDTO>( list.size() );
-        for ( User user : list ) {
-            list1.add( userToUserDTO( user ) );
-        }
-
-        return list1;
     }
 
     protected RoleDTO roleToRoleDTO(Role role) {
@@ -195,7 +127,6 @@ public class ReservationMapperImpl implements ReservationMapper {
         roleDTO.setIdRole( role.getIdRole() );
         roleDTO.setNomRole( role.getNomRole() );
         roleDTO.setActifRole( role.getActifRole() );
-        roleDTO.setUsers( userListToUserDTOList( role.getUsers() ) );
 
         return roleDTO;
     }
@@ -214,44 +145,7 @@ public class ReservationMapperImpl implements ReservationMapper {
         userDTO.setMotDePasse( user.getMotDePasse() );
         userDTO.setActifUser( user.getActifUser() );
         userDTO.setRole( roleToRoleDTO( user.getRole() ) );
-        userDTO.setReservations( toDto( user.getReservations() ) );
 
         return userDTO;
-    }
-
-    protected LivreDTO livreToLivreDTO(Livre livre) {
-        if ( livre == null ) {
-            return null;
-        }
-
-        LivreDTO livreDTO = new LivreDTO();
-
-        livreDTO.setIdLivre( livre.getIdLivre() );
-        livreDTO.setTitre( livre.getTitre() );
-        livreDTO.setAuteur( livre.getAuteur() );
-        livreDTO.setPublication( livre.getPublication() );
-        livreDTO.setResume( livre.getResume() );
-        livreDTO.setNombrePages( livre.getNombrePages() );
-        livreDTO.setNomCategorie( livre.getNomCategorie() );
-        livreDTO.setDateAchat( livre.getDateAchat() );
-        livreDTO.setPrixLocation( livre.getPrixLocation() );
-        livreDTO.setEtatLivre( livre.getEtatLivre() );
-        livreDTO.setDisponibilite( livre.getDisponibilite() );
-        livreDTO.setReservation( toDto( livre.getReservation() ) );
-
-        return livreDTO;
-    }
-
-    protected List<LivreDTO> livreListToLivreDTOList(List<Livre> list) {
-        if ( list == null ) {
-            return null;
-        }
-
-        List<LivreDTO> list1 = new ArrayList<LivreDTO>( list.size() );
-        for ( Livre livre : list ) {
-            list1.add( livreToLivreDTO( livre ) );
-        }
-
-        return list1;
     }
 }

@@ -14,5 +14,4 @@ public class UserDTO {
     private String motDePasse;
     private Boolean actifUser;
     private RoleDTO role;
-    private List<ReservationDTO> reservations;
 }

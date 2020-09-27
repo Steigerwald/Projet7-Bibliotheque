@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-09-27T23:39:27+0200",
+    date = "2020-09-27T23:57:44+0200",
     comments = "version: 1.3.1.Final, compiler: javac, environment: Java 11.0.6 (Oracle Corporation)"
 )
 @Component
@@ -97,19 +97,6 @@ public class LivreMapperImpl implements LivreMapper {
         return list;
     }
 
-    protected List<User> userDTOListToUserList(List<UserDTO> list) {
-        if ( list == null ) {
-            return null;
-        }
-
-        List<User> list1 = new ArrayList<User>( list.size() );
-        for ( UserDTO userDTO : list ) {
-            list1.add( userDTOToUser( userDTO ) );
-        }
-
-        return list1;
-    }
-
     protected Role roleDTOToRole(RoleDTO roleDTO) {
         if ( roleDTO == null ) {
             return null;
@@ -120,22 +107,8 @@ public class LivreMapperImpl implements LivreMapper {
         role.setIdRole( roleDTO.getIdRole() );
         role.setNomRole( roleDTO.getNomRole() );
         role.setActifRole( roleDTO.getActifRole() );
-        role.setUsers( userDTOListToUserList( roleDTO.getUsers() ) );
 
         return role;
-    }
-
-    protected List<Reservation> reservationDTOListToReservationList(List<ReservationDTO> list) {
-        if ( list == null ) {
-            return null;
-        }
-
-        List<Reservation> list1 = new ArrayList<Reservation>( list.size() );
-        for ( ReservationDTO reservationDTO : list ) {
-            list1.add( reservationDTOToReservation( reservationDTO ) );
-        }
-
-        return list1;
     }
 
     protected User userDTOToUser(UserDTO userDTO) {
@@ -152,7 +125,6 @@ public class LivreMapperImpl implements LivreMapper {
         user.setMotDePasse( userDTO.getMotDePasse() );
         user.setActifUser( userDTO.getActifUser() );
         user.setRole( roleDTOToRole( userDTO.getRole() ) );
-        user.setReservations( reservationDTOListToReservationList( userDTO.getReservations() ) );
 
         return user;
     }
@@ -171,22 +143,8 @@ public class LivreMapperImpl implements LivreMapper {
         reservation.setDelaiDeLocation( reservationDTO.getDelaiDeLocation() );
         reservation.setIsactif( reservationDTO.getIsactif() );
         reservation.setUser( userDTOToUser( reservationDTO.getUser() ) );
-        reservation.setLivres( toEntity( reservationDTO.getLivres() ) );
 
         return reservation;
-    }
-
-    protected List<UserDTO> userListToUserDTOList(List<User> list) {
-        if ( list == null ) {
-            return null;
-        }
-
-        List<UserDTO> list1 = new ArrayList<UserDTO>( list.size() );
-        for ( User user : list ) {
-            list1.add( userToUserDTO( user ) );
-        }
-
-        return list1;
     }
 
     protected RoleDTO roleToRoleDTO(Role role) {
@@ -199,22 +157,8 @@ public class LivreMapperImpl implements LivreMapper {
         roleDTO.setIdRole( role.getIdRole() );
         roleDTO.setNomRole( role.getNomRole() );
         roleDTO.setActifRole( role.getActifRole() );
-        roleDTO.setUsers( userListToUserDTOList( role.getUsers() ) );
 
         return roleDTO;
-    }
-
-    protected List<ReservationDTO> reservationListToReservationDTOList(List<Reservation> list) {
-        if ( list == null ) {
-            return null;
-        }
-
-        List<ReservationDTO> list1 = new ArrayList<ReservationDTO>( list.size() );
-        for ( Reservation reservation : list ) {
-            list1.add( reservationToReservationDTO( reservation ) );
-        }
-
-        return list1;
     }
 
     protected UserDTO userToUserDTO(User user) {
@@ -231,7 +175,6 @@ public class LivreMapperImpl implements LivreMapper {
         userDTO.setMotDePasse( user.getMotDePasse() );
         userDTO.setActifUser( user.getActifUser() );
         userDTO.setRole( roleToRoleDTO( user.getRole() ) );
-        userDTO.setReservations( reservationListToReservationDTOList( user.getReservations() ) );
 
         return userDTO;
     }
@@ -250,7 +193,6 @@ public class LivreMapperImpl implements LivreMapper {
         reservationDTO.setDelaiDeLocation( reservation.getDelaiDeLocation() );
         reservationDTO.setIsactif( reservation.getIsactif() );
         reservationDTO.setUser( userToUserDTO( reservation.getUser() ) );
-        reservationDTO.setLivres( toDto( reservation.getLivres() ) );
 
         return reservationDTO;
     }

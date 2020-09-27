@@ -10,7 +10,6 @@ public class RoleDTO {
     private int idRole;
     private String nomRole;
     private Boolean actifRole;
-    private List<UserDTO> users;
 }
 
 

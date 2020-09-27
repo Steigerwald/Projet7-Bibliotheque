@@ -18,5 +18,4 @@ public class LivreDTO {
     private String etatLivre;
     private Boolean disponibilite;
     private ReservationDTO reservation;
-
 }

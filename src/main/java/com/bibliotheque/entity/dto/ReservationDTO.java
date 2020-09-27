@@ -15,5 +15,4 @@ public class ReservationDTO {
     private int delaiDeLocation;
     private Boolean isactif;
     private UserDTO user;
-    private List<LivreDTO> livres;
 }
