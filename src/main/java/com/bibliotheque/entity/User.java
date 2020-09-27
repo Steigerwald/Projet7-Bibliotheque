@@ -1,13 +1,10 @@
 package com.bibliotheque.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import lombok.Data;
 import org.springframework.lang.Nullable;
-
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table (name = "TBL_USER")
@@ -43,7 +40,6 @@ public class User {
 
     @OneToMany(mappedBy="user",fetch=FetchType.LAZY,orphanRemoval=true)
     @Nullable
-    private Collection<Reservation> reservations;
-
+    private List<Reservation> reservations;
 
 }

@@ -1,12 +1,9 @@
 package com.bibliotheque.entity.dto;
 
 
-import com.bibliotheque.entity.Livre;
-import com.bibliotheque.entity.User;
 import lombok.Data;
-
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class ReservationDTO {
@@ -17,5 +14,6 @@ public class ReservationDTO {
     private Date dateDeRetrait;
     private int delaiDeLocation;
     private Boolean isactif;
-    private User user;
+    private UserDTO user;
+    private List<LivreDTO> livres;
 }

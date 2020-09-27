@@ -6,6 +6,7 @@ import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 
 @Entity
@@ -24,8 +25,9 @@ public class Role {
     @Column(name="ACTIF_ROLE")
     private Boolean actifRole;
 
-    @OneToMany(mappedBy = "role",fetch=FetchType.LAZY,orphanRemoval = true)
+    //@OneToMany(mappedBy = "role",fetch=FetchType.LAZY,orphanRemoval = true)
+    @OneToMany(mappedBy = "role")
     @Nullable
-    private Collection<User> users;
+    private List<User> users;
 
 }

@@ -46,13 +46,9 @@ public class Livre {
     @Column(name="DISPONIBILITE")
     private Boolean disponibilite;
 
-    @ManyToOne(fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
+    @ManyToOne
     @Nullable
     private Reservation reservation;
 
-
-    // Constructeur
-    public Livre() {
-    }
 
 }

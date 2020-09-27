@@ -114,5 +114,4 @@ public class UserController {
         return new ResponseEntity<>(roleMapper.toDto(leRole), HttpStatus.OK);
     }
 
-
 }

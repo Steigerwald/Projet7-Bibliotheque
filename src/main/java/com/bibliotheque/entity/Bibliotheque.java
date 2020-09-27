@@ -24,8 +24,4 @@ public class Bibliotheque {
     private String adresse;
 
 
-    // Constructeur
-    public Bibliotheque() {
-    }
-
 }

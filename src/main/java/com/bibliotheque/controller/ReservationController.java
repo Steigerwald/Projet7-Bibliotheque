@@ -24,16 +24,17 @@ public class ReservationController {
     ReservationMapper reservationMapper;
 
     /* controller pour avoir toutes les reservations*/
-    @RequestMapping("/")
+    @RequestMapping(path ="/",method = RequestMethod.GET)
     public ResponseEntity<List<ReservationDTO> >listOfReservations() {
         List<Reservation> toutesReservations =reservationService.findAll();
         return new ResponseEntity<>(reservationMapper.toDto(toutesReservations), HttpStatus.OK);
     }
 
     /* controller pour obtenir une reservation */
-    @RequestMapping("/{id}")
+    @RequestMapping(path ="/{id}",method = RequestMethod.GET)
     public ResponseEntity<ReservationDTO> reservationId(@PathVariable int id) {
         Reservation laReservation =reservationService.findById(id);
+        System.out.println(laReservation.getUser());
         return new ResponseEntity<>(reservationMapper.toDto(laReservation), HttpStatus.OK);
     }
 
@@ -46,7 +47,7 @@ public class ReservationController {
     }
 
     /* controller pour modifier une reservation */
-    @RequestMapping(path = "/updateReservation",method = RequestMethod.PUT,produces = "application/json")
+    @RequestMapping(path = "/",method = RequestMethod.PUT,produces = "application/json")
     public ResponseEntity<ReservationDTO> updateReservation(@RequestBody ReservationDTO reservationModifieDTO) throws RecordNotFoundException {
         Reservation reservationModifie = reservationMapper.toEntity(reservationModifieDTO);
         Reservation reservation=reservationService.updateReservation(reservationModifie);
@@ -55,13 +56,13 @@ public class ReservationController {
     }
 
     /* controller pour effacer une reservation de la base de données */
-    @RequestMapping(path = "/deleteReservation/{id}",method = RequestMethod.DELETE)
+    @RequestMapping(path = "/{id}",method = RequestMethod.DELETE)
     public void deleteReservationById(Model model, @PathVariable("id") int id) throws RecordNotFoundException{
        reservationService.deleteReservationById(id);
     }
 
     /* controller pour annuler une reservation */
-    @RequestMapping(path = "/annulerReservation",method = RequestMethod.POST,produces = "application/json")
+    @RequestMapping(path = "/annulerReservation",method = RequestMethod.PUT,produces = "application/json")
     public ResponseEntity<ReservationDTO> annulerReservation(@RequestBody ReservationDTO reservationAnnuleeDTO) throws RecordNotFoundException {
         Reservation reservationAnnulee = reservationMapper.toEntity(reservationAnnuleeDTO);
         ReservationDTO dto = reservationMapper.toDto(reservationService.annulerReservation(reservationAnnulee));

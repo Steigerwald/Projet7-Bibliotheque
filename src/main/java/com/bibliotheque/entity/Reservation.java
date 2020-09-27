@@ -6,6 +6,7 @@ import org.springframework.lang.Nullable;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "TBL_RESERVATION")
@@ -35,15 +36,10 @@ public class Reservation {
     @Column(name="ISACTIF")
     private Boolean isactif;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne
     private User user;
 
-    @OneToMany(mappedBy = "reservation",fetch=FetchType.LAZY,orphanRemoval=true)
-    private Collection<Livre> livres;
-
-    // Constructeur
-
-    public Reservation() {
-    }
+    @OneToMany(mappedBy = "reservation",fetch=FetchType.LAZY,orphanRemoval = true)
+    private List<Livre> livres;
 
 }

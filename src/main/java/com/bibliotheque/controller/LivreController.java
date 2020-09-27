@@ -60,7 +60,7 @@ public class LivreController {
     }
 
     /* controller pour modifier un livre */
-    @RequestMapping(path = "/updateLivre",method = RequestMethod.PUT,produces = "application/json")
+    @RequestMapping(path = "/",method = RequestMethod.PUT,produces = "application/json")
     public ResponseEntity<LivreDTO> updateLivre(@RequestBody LivreDTO livreModifieDTO) throws RecordNotFoundException {
         Livre livreModifie = livreMapper.toEntity(livreModifieDTO);
         Livre livre=livreService.updateLivre(livreModifie);
@@ -69,13 +69,13 @@ public class LivreController {
     }
 
     /* controller pour effacer un livre de la base de données */
-    @RequestMapping(path = "/deleteLivre/{id}",method = RequestMethod.DELETE)
+    @RequestMapping(path = "/{id}",method = RequestMethod.DELETE)
     public void deleteLivreById(Model model, @PathVariable("id") int id) throws RecordNotFoundException{
         livreService.deleteLivreById(id);
     }
 
     /* Controller pour chercher un livre par titre ou par auteur ou par nom de categorie */
-    @RequestMapping(path = "/searchLivres", method = RequestMethod.POST,produces = "application/json")
+    @RequestMapping(path = "/search", method = RequestMethod.POST,produces = "application/json")
     public ResponseEntity<List<LivreDTO> >searchLivresByTitreOrByAuteurOrByNomCategorie(@RequestBody SearchDTO searchDTO) {
         Search search=searchMapper.toEntity(searchDTO);
         List<Livre> listLivresTrouves = livreService.getAllLivresBySearch(search);
