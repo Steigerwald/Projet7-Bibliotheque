@@ -22,13 +22,11 @@ public class ReservationService {
 
     /*Methode pour avoir toutes les reservations de la base de données*/
     public List<Reservation> findAll() {
-
         return reservationRepository.findAll();
     }
 
     /*Methode pour trouver par son id une reservation dans la base de données*/
     public Reservation findById(int id) {
-
         return  reservationRepository.findById(id).get();
     }
 

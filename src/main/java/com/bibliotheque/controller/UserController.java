@@ -1,8 +1,11 @@
 package com.bibliotheque.controller;
 
 
+import com.bibliotheque.entity.Role;
 import com.bibliotheque.entity.User;
+import com.bibliotheque.entity.dto.RoleDTO;
 import com.bibliotheque.entity.dto.UserDTO;
+import com.bibliotheque.entity.mapper.RoleMapper;
 import com.bibliotheque.entity.mapper.UserMapper;
 import com.bibliotheque.exception.RecordNotFoundException;
 import com.bibliotheque.service.CustomUserDetailsService;
@@ -24,6 +27,9 @@ public class UserController {
 
     @Autowired
     public UserService userService;
+
+    @Autowired
+    public RoleMapper roleMapper;
 
     @Autowired
     public CustomUserDetailsService customUserDetailsService;
@@ -92,6 +98,20 @@ public class UserController {
     @RequestMapping(path = "user/desactiverUser/{id}",method = RequestMethod.PUT)
     public void desactiverUserById(@PathVariable("id") int id) throws RecordNotFoundException{
         userService.desactiveUserById(id);
+    }
+
+    /* controller pour avoir tous les roles*/
+    @RequestMapping(path="roles/",method=RequestMethod.GET)
+    public ResponseEntity<List<RoleDTO>> listOfRoles() {
+        List<Role> tousLesRoles= userService.getAllRoles();
+        return new ResponseEntity<>(roleMapper.toDto(tousLesRoles), HttpStatus.OK);
+    }
+
+    /* controller pour obtenir un role */
+    @RequestMapping(path="role/{id}",method=RequestMethod.GET)
+    public ResponseEntity<RoleDTO> roleId(@PathVariable int id) throws RecordNotFoundException {
+        Role leRole=userService.getRoleById(id);
+        return new ResponseEntity<>(roleMapper.toDto(leRole), HttpStatus.OK);
     }
 
 

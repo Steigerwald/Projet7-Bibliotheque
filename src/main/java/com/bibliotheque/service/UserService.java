@@ -97,6 +97,18 @@ public class UserService {
         }
     }
 
+    /*Methode pour avoir tous les roles enregistrés dans la base de données*/
+    public List<Role> getAllRoles() {
+        List<Role> resultRole = (List<Role>) roleRepository.findAll();
+        if(resultRole.size() > 0) {
+            logger.info(" retour liste resultRole car resultRole n'est pas vide ");
+            return resultRole;
+        } else {
+            logger.info(" retour nouvelle liste vide car pas d'élément dans la liste resultRole de getAllRoles ");
+            return new ArrayList<Role>();
+        }
+    }
+
 
     /*Methode pour effacer un user dans la base de données*/
     public void deleteUserById(int id) throws RecordNotFoundException {

@@ -16,7 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
-@EnableWebSecurity
+//@EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, proxyTargetClass = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -51,37 +51,42 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     // le gros de la configuration est ici
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        /*
         http
                 .headers()
                 .frameOptions().sameOrigin()
-                .and()
-                .authorizeRequests()
-                .antMatchers("/bibliotheque/**","/webjars/**","/livre/**","/livre/","/reservation/**","/","/user/**","/users").permitAll()
-                //.antMatchers("/bibliottheques/addBibliotheque","/bibliottheques/updateBibliotheque","/bibliottheques/deleteBibliotheque/**","/livres/delete/**","/livres/addLivre","/livres/updateLivre","/reservations/reservation/**","/reservations/deleteReservation/**","/reservations/updateReservation/**").hasRole("ADMIN")
-                .antMatchers().permitAll()
-                //.anyRequest().permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/home")
-                .failureUrl("/login?error")
-                .permitAll()
-                .and()
-                .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/")
-                .deleteCookies("my-remember-me-cookie")
-                .permitAll()
-                .and()
-                .rememberMe()
-                //.key("my-secure-key")
-                .rememberMeCookieName("my-remember-me-cookie")
-                //.tokenValiditySeconds(24 * 60 * 60)
-                .and()
-                .exceptionHandling()
+                        .and()
+                            .authorizeRequests()
+                                .antMatchers("/bibliotheque/**","/webjars/**","/livre/**","/livre/","/reservation/**","/","/user/**","/users").permitAll()
+                                //.antMatchers("/bibliottheques/addBibliotheque","/bibliottheques/updateBibliotheque","/bibliottheques/deleteBibliotheque/**","/livres/delete/**","/livres/addLivre","/livres/updateLivre","/reservations/reservation/**","/reservations/deleteReservation/**","/reservations/updateReservation/**").hasRole("ADMIN")
+                                    .antMatchers().permitAll()
+                                    //.anyRequest().permitAll()
+                                    .anyRequest().authenticated()
+                                    .and()
+                                .formLogin()
+                                    .usernameParameter("j_username")
+                                    .passwordParameter("j_password")
+                                    .loginPage("/login")
+                                    .defaultSuccessUrl("/home")
+                                    .failureUrl("/login?error")
+                                    .permitAll()
+                                    .and()
+                                .logout()
+                                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                                    .logoutSuccessUrl("/")
+                                    .deleteCookies("my-remember-me-cookie")
+                                        .permitAll()
+                                        .and()
+                                .rememberMe()
+                                    //.key("my-secure-key")
+                                    .rememberMeCookieName("my-remember-me-cookie")
+                                    //.tokenValiditySeconds(24 * 60 * 60)
+                                    .and()
+                                .exceptionHandling()
         ;
     }
+*/
+
 
 /*
     @Autowired
@@ -90,7 +95,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth
                 .userDetailsService(customUserDetailsService)
                 .passwordEncoder(passwordEncoder());
-    }
+
 
 
     @Override
@@ -110,7 +115,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                             "/reservations/updateReservation/**").hasRole("ADMIN")
                     .anyRequest().authenticated()*/
 
-        /*
+
         http
                 .authorizeRequests().anyRequest().permitAll()
                 .and()
@@ -118,8 +123,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable()
                 .formLogin().disable();
-
-/*
+    }
+        /*
             http
                     .formLogin().loginPage("/login").failureUrl("/login?error=true")
                     .defaultSuccessUrl("/loggedhome")
