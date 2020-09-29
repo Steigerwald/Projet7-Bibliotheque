@@ -50,5 +50,6 @@ public class Livre {
     @Nullable
     private Reservation reservation;
 
-
+    @ManyToOne
+    private Bibliotheque bibliotheque;
 }

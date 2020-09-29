@@ -1,8 +1,10 @@
 package com.bibliotheque.entity;
 
 import lombok.Data;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table (name = "TBL_BIBLIOTHEQUE")
@@ -23,5 +25,7 @@ public class Bibliotheque {
     @Column(name="ADRESSE")
     private String adresse;
 
-
+    @OneToMany(mappedBy="bibliotheque",fetch=FetchType.LAZY,orphanRemoval=true)
+    @Nullable
+    private List<Livre> livres;
 }
