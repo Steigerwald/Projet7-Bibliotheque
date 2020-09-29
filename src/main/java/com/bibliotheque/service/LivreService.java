@@ -96,7 +96,7 @@ public class LivreService {
 
     /*Methode pour obtenir tous les exemplaires disponibles d'un livre par titre */
     public List<Livre> getLivreDisponibleByTitre(String titre) throws RecordNotFoundException {
-        List<Livre> listeLivresTrouves = livreRepository.findByTitre(titre);
+        List<Livre> listeLivresTrouves = livreRepository.findAllByTitre(titre);
         List<Livre> livresDisponibles =new ArrayList<>();
         if(listeLivresTrouves.size()>0) {
             logger.info(" retour du livre car la liste des livre trouvé n'est pas vide ");
