@@ -100,6 +100,12 @@ public class UserController {
         userService.desactiveUserById(id);
     }
 
+    /* controller pour réactiver un user de la base de données */
+    @RequestMapping(path = "user/reactiverUser/{id}",method = RequestMethod.PUT)
+    public void reactiverUserById(@PathVariable("id") int id) throws RecordNotFoundException{
+        userService.reactiveUserById(id);
+    }
+
     /* controller pour avoir tous les roles*/
     @RequestMapping(path="roles/",method=RequestMethod.GET)
     public ResponseEntity<List<RoleDTO>> listOfRoles() {

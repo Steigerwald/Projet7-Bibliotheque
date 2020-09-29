@@ -134,6 +134,18 @@ public class UserService {
         }
     }
 
+    /*Methode pour réactiver un user dans la base de données*/
+    public void reactiveUserById(int id) throws RecordNotFoundException {
+        Optional<User> userAReactiver = userRepository.findById(id);
+        if(userAReactiver.isPresent()) {
+            User userTrouve = userAReactiver.get();
+            userTrouve.setActifUser(true);
+            updateUser(userTrouve);
+        } else {
+            throw new RecordNotFoundException("Pas de livre enregistré avec cet Id");
+        }
+    }
+
 
 
 }
