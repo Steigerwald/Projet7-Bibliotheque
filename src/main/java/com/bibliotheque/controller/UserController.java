@@ -80,7 +80,7 @@ public class UserController {
     }
 
     /* controller pour modifier un user */
-    @RequestMapping(path = "user/updateUser",method = RequestMethod.PUT,produces = "application/json")
+    @RequestMapping(path = "user",method = RequestMethod.PUT,produces = "application/json")
     public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO userModifieDTO) throws RecordNotFoundException {
         User userModifie = userMapper.toEntity(userModifieDTO);
         User user=userService.updateUser(userModifie);
@@ -89,7 +89,7 @@ public class UserController {
     }
 
     /* controller pour effacer un user de la base de données */
-    @RequestMapping(path = "user/deleteUser/{id}",method = RequestMethod.DELETE)
+    @RequestMapping(path = "user/{id}",method = RequestMethod.DELETE)
     public void deleteUserById(@PathVariable("id") int id) throws RecordNotFoundException{
         userService.deleteUserById(id);
     }

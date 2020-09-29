@@ -80,6 +80,7 @@ public class UserService {
         Optional<User> userAModifier = userRepository.findByIdUser(user.getIdUser());
         if(userAModifier.isPresent())
         { logger.info(" l'entité user à modifier a été trouvée et peut être modifiée");
+            user.setReservations(userAModifier.get().getReservations());
             return userRepository.save(user);
         } else {
             throw new RecordNotFoundException("Pas d'entité User enregistrée avec cet Id et elle ne peut pas être modifiée");

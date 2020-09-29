@@ -25,8 +25,8 @@ public class Role {
     @Column(name="ACTIF_ROLE")
     private Boolean actifRole;
 
-    //@OneToMany(mappedBy = "role",fetch=FetchType.LAZY,orphanRemoval = true)
-    @OneToMany(mappedBy = "role")
+    @OneToMany(mappedBy = "role",fetch=FetchType.LAZY,orphanRemoval = true)
+    //@OneToMany(mappedBy = "role")
     @Nullable
     private List<User> users;
 
