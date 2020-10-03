@@ -51,6 +51,7 @@ public class LivreController {
         return new ResponseEntity<>(livreMapper.toDto(LivresDispo), HttpStatus.OK);
     }
 
+
     /* controller pour ajouter un livre */
     @RequestMapping(path = "/addLivre",method = RequestMethod.POST,produces = "application/json")
     public ResponseEntity<LivreDTO> newBook(@RequestBody LivreDTO livreDTO) throws RecordNotFoundException {
@@ -80,7 +81,7 @@ public class LivreController {
         Search search=searchMapper.toEntity(searchDTO);
         List<Livre> listLivresTrouves = livreService.getAllLivresBySearch(search);
         if (listLivresTrouves.size()==0){
-            return null;
+            return new ResponseEntity<>(livreMapper.toDto(listLivresTrouves),HttpStatus.NOT_FOUND);
         } else{
             return new ResponseEntity<>(livreMapper.toDto(listLivresTrouves),HttpStatus.OK);
         }
@@ -92,7 +93,7 @@ public class LivreController {
         Search search=searchMapper.toEntity(searchDTO);
         List<Livre> listLivresTrouves =livreService.getLivreDisponibleByTitre(search.getTitre());
         if (listLivresTrouves.size()==0){
-            return null;
+            return new ResponseEntity<>(livreMapper.toDto(listLivresTrouves),HttpStatus.NOT_FOUND);
         } else{
             return new ResponseEntity<>(livreMapper.toDto(listLivresTrouves),HttpStatus.OK);
         }

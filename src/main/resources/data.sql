@@ -43,6 +43,12 @@ INSERT INTO bibliotheques.TBL_USER (id_user,actif_user, mail_user, mot_passe, no
 (4,true, 'jean@gmail.com', '$2a$10$GQXfIS9n2oJuE1lVI70yFeu5iJn/PEm5B0CUrfGEUT7bSRcsuqCnS', 'Pierre','Jean',2),
 (5,true, 'anne@gmail.com', '$2a$10$GQXfIS9n2oJuE1lVI70yFeu5iJn/PEm5B0CUrfGEUT7bSRcsuqCnS', 'Priska','Anne',2);
 
+INSERT INTO bibliotheques.TBL_BIBLIOTHEQUE_USERS (bibliotheques_id_bibliotheque,users_id_user) VALUES
+(1,1),
+(2,3),
+(3,2),
+(3,3);
+
 INSERT INTO bibliotheques.TBL_ROLE (id_role, actif_role,nom_role) VALUES
 (1,true, 'ROLE_ADMIN'),
 (2,true, 'ROLE_USER');

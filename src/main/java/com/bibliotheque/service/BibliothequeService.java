@@ -49,7 +49,9 @@ public class BibliothequeService {
         if (bibliothequeAModifier != null) {
             logger.info(" l'entité bibliotheque à modifier a été trouvée et peut être modifiée et l'Id est: "+bibliothequeAModifier.getIdBibliotheque());
             logger.info(" retour de la nouvelle entité site de updateBibliotheque qui a été sauvegardée et la bibliothequeAModifier était existante");
-            entity.setLivres(bibliothequeAModifier.getLivres());
+            if (entity.getLivres()==null) {
+                entity.setLivres(bibliothequeAModifier.getLivres());
+            }
             return bibliothequeRepository.save(entity);
         } else {
             throw new RecordNotFoundException("Pas de bibliotheque trouvée avec l'id de l'entité et elle ne peut être modifiée");

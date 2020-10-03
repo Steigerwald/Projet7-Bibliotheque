@@ -4,6 +4,7 @@ import com.sun.istack.NotNull;
 import lombok.Data;
 import org.springframework.lang.Nullable;
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -41,5 +42,10 @@ public class User {
     @OneToMany(mappedBy="user",fetch=FetchType.LAZY,orphanRemoval=true)
     @Nullable
     private List<Reservation> reservations;
+
+    @ManyToMany(mappedBy="users",fetch=FetchType.LAZY)
+    @Nullable
+    private Collection<Bibliotheque> bibliotheques;
+
 
 }

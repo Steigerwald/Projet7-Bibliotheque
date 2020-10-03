@@ -1,5 +1,6 @@
 package com.bibliotheque.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import org.springframework.lang.Nullable;
 
@@ -28,4 +29,10 @@ public class Bibliotheque {
     @OneToMany(mappedBy="bibliotheque",fetch=FetchType.LAZY,orphanRemoval=true)
     @Nullable
     private List<Livre> livres;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "TBL_BIBLIOTHEQUE_USERS", joinColumns = @JoinColumn(name = "bibliotheques_id_bibliotheque"),
+            inverseJoinColumns = @JoinColumn(name = "users_id_user"))
+    @Nullable
+    private List<User> users;
 }
