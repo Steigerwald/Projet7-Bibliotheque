@@ -36,6 +36,7 @@ public class User {
     @Column(name="ACTIF_USER")
     private Boolean actifUser;
 
+
     @ManyToOne
     private Role role;
 

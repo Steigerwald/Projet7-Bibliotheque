@@ -10,13 +10,12 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 
-
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
     @Autowired
     private MessageSource messageSource;
-
+/*
     @Override
     public void addViewControllers(ViewControllerRegistry registry)
     {
@@ -28,8 +27,7 @@ public class WebConfig implements WebMvcConfigurer {
         //registry.addViewController("/registration").setViewName("registration-view");
         //registry.addViewController("/registration/create").setViewName("success");
     }
-
-    /*
+/*
     @Override
     public Validator getValidator() {
         LocalValidatorFactoryBean factory = new LocalValidatorFactoryBean();
@@ -41,7 +39,5 @@ public class WebConfig implements WebMvcConfigurer {
     public SpringSecurityDialect securityDialect() {
         return new SpringSecurityDialect();
     }
-
-
 
 }

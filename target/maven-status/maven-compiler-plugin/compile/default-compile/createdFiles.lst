@@ -17,6 +17,7 @@ com/bibliotheque/service/ReservationService.class
 com/bibliotheque/repository/BibliothequeRepository.class
 com/bibliotheque/service/LivreService.class
 com/bibliotheque/entity/mapper/LivreMapper.class
+com/bibliotheque/security/JWTAuthorizationFilter.class
 com/bibliotheque/entity/Bibliotheque.class
 com/bibliotheque/controller/BibliothequeController.class
 com/bibliotheque/service/CustomUserDetailsService.class

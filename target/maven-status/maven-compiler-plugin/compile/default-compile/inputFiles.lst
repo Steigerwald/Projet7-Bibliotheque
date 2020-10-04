@@ -17,6 +17,7 @@
 /Users/bricesteigerwald/IdeaProjects/Projet7-Bibliotheque/src/main/java/com/bibliotheque/EntityApplication.java
 /Users/bricesteigerwald/IdeaProjects/Projet7-Bibliotheque/src/main/java/com/bibliotheque/controller/BibliothequeController.java
 /Users/bricesteigerwald/IdeaProjects/Projet7-Bibliotheque/src/main/java/com/bibliotheque/exception/RecordNotFoundException.java
+/Users/bricesteigerwald/IdeaProjects/Projet7-Bibliotheque/src/main/java/com/bibliotheque/security/JWTAuthorizationFilter.java
 /Users/bricesteigerwald/IdeaProjects/Projet7-Bibliotheque/src/main/java/com/bibliotheque/security/WebSecurityConfig.java
 /Users/bricesteigerwald/IdeaProjects/Projet7-Bibliotheque/src/main/java/com/bibliotheque/entity/Bibliotheque.java
 /Users/bricesteigerwald/IdeaProjects/Projet7-Bibliotheque/src/main/java/com/bibliotheque/security/WebConfig.java
