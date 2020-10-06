@@ -34,7 +34,11 @@ public class BibliothequeController {
     @RequestMapping(path="/{id}",method = RequestMethod.GET)
     public ResponseEntity<BibliothequeDTO> bibliothequeId(@PathVariable int id) {
         Bibliotheque laBibliotheque= bibliothequeService.findById(id);
-        return new ResponseEntity<>(bibliothequeMapper.toDto(laBibliotheque), HttpStatus.OK);
+        if (laBibliotheque==null){
+            return new ResponseEntity<>(bibliothequeMapper.toDto(laBibliotheque), HttpStatus.NOT_FOUND);
+        }else{
+            return new ResponseEntity<>(bibliothequeMapper.toDto(laBibliotheque), HttpStatus.OK);
+        }
     }
 
     /* controller pour ajouter une bibliotheque */

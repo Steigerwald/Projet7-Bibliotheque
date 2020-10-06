@@ -34,8 +34,11 @@ public class ReservationController {
     @RequestMapping(path ="/{id}",method = RequestMethod.GET)
     public ResponseEntity<ReservationDTO> reservationId(@PathVariable int id) {
         Reservation laReservation =reservationService.findById(id);
-        System.out.println(laReservation.getUser());
-        return new ResponseEntity<>(reservationMapper.toDto(laReservation), HttpStatus.OK);
+        if (laReservation==null){
+            return new ResponseEntity<>(reservationMapper.toDto(laReservation), HttpStatus.NOT_FOUND);
+        }else{
+            return new ResponseEntity<>(reservationMapper.toDto(laReservation), HttpStatus.OK);
+        }
     }
 
     /* controller pour ajouter une reservation */

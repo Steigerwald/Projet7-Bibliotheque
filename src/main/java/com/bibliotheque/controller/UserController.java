@@ -39,20 +39,14 @@ public class UserController {
     @Autowired
     public RoleMapper roleMapper;
 
-    @PostMapping("login")
-    public User login(@RequestParam("user") String username, @RequestParam("password") String pwd) {
-
+    /* controller login pour se connecter*/
+    @RequestMapping(path="login",method=RequestMethod.POST)
+    public String login(@RequestParam("user") String username) {
         String token = getJWTToken(username);
         User userConnecte = new User();
         userConnecte.setMailUser(username);
-        userConnecte.setMotDePasse(pwd);
-        //userConnecte.setToken(token);
-        return userConnecte;
+        return token;
     }
-
-
-    @PostMapping("userConnecte")
-
 
     private String getJWTToken(String username) {
         String secretKey = "mySecretKey";
@@ -73,6 +67,19 @@ public class UserController {
         return "Bearer " + token;
     }
 
+
+    @RequestMapping(path="user/me",method=RequestMethod.GET)
+    public ResponseEntity<UserDTO> userConnecte(@RequestBody String username) {
+
+        User userConnecte = userService.getUserByMail(username);
+        if (userConnecte==null){
+            return new ResponseEntity<>(userMapper.toDto(userConnecte), HttpStatus.NOT_FOUND);
+        }else{
+            return new ResponseEntity<>(userMapper.toDto(userConnecte), HttpStatus.OK);
+        }
+    }
+
+
     /* controller pour avoir tous les users*/
     @RequestMapping(path="users/",method=RequestMethod.GET)
     public ResponseEntity<List<UserDTO>> listOfUsers() {
@@ -85,7 +92,11 @@ public class UserController {
     @RequestMapping(path="user/{id}",method=RequestMethod.GET)
     public ResponseEntity<UserDTO> userId(@PathVariable int id) throws RecordNotFoundException {
         User leUser=userService.getUserById(id);
-        return new ResponseEntity<>(userMapper.toDto(leUser), HttpStatus.OK);
+        if (leUser==null){
+            return new ResponseEntity<>(userMapper.toDto(leUser), HttpStatus.NOT_FOUND);
+        }else{
+            return new ResponseEntity<>(userMapper.toDto(leUser), HttpStatus.OK);
+        }
     }
 
     /* controller pour ajouter un user */

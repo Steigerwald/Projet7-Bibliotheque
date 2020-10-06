@@ -42,7 +42,11 @@ public class LivreController {
     public ResponseEntity <LivreDTO> bookId(@PathVariable int id) {
         Livre leLivre =livreService.findById(id);
         // mettre le if
-        return new ResponseEntity<>(livreMapper.toDto(leLivre), HttpStatus.OK);
+        if (leLivre==null){
+            return new ResponseEntity<>(livreMapper.toDto(leLivre), HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(livreMapper.toDto(leLivre), HttpStatus.OK);
+        }
     }
 
     /* Controller pour la liste de tous les livres disponibles */
