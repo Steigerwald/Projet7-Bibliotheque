@@ -40,7 +40,7 @@ public class UserController {
     public RoleMapper roleMapper;
 
     /* controller login pour se connecter*/
-    @RequestMapping(path="login",method=RequestMethod.POST)
+    @RequestMapping(path="user",method=RequestMethod.POST)
     public String login(@RequestParam("user") String username) {
         String token = getJWTToken(username);
         User userConnecte = new User();
@@ -68,14 +68,14 @@ public class UserController {
     }
 
 
-    @RequestMapping(path="user/me",method=RequestMethod.GET)
-    public ResponseEntity<UserDTO> userConnecte(@RequestBody String username) {
+    @RequestMapping(path="user/me",method=RequestMethod.POST)
+    public ResponseEntity<UserDTO> userConnecte(@RequestParam("username") String username) {
 
-        User userConnecte = userService.getUserByMail(username);
-        if (userConnecte==null){
-            return new ResponseEntity<>(userMapper.toDto(userConnecte), HttpStatus.NOT_FOUND);
+        User userConcerne = userService.getUserByMail(username);
+        if (userConcerne==null){
+            return new ResponseEntity<>(userMapper.toDto(userConcerne), HttpStatus.NOT_FOUND);
         }else{
-            return new ResponseEntity<>(userMapper.toDto(userConnecte), HttpStatus.OK);
+            return new ResponseEntity<>(userMapper.toDto(userConcerne), HttpStatus.OK);
         }
     }
 
