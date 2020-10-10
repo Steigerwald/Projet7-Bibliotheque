@@ -40,7 +40,7 @@ public class UserController {
     public RoleMapper roleMapper;
 
     /* controller login pour se connecter*/
-    @RequestMapping(path="user",method=RequestMethod.POST)
+    @RequestMapping(path="login",method=RequestMethod.POST)
     public String login(@RequestParam("user") String username) {
         String token = getJWTToken(username);
         User userConnecte = new User();
