@@ -38,16 +38,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .userDetailsService(customUserDetailsService)
                 .passwordEncoder(passwordEncoder());
     }
-/*
+
     // Pour annuler les autorisations sur les ressources
     @Override
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/pictures/**");
+                .antMatchers("/livre/","/bibliotheque/","/resources/**", "/static/**", "/css/**", "/js/**", "/pictures/**");
 
     }
-
+/*
     // le gros de la configuration est ici
     @Override
     protected void configure(HttpSecurity http) throws Exception {

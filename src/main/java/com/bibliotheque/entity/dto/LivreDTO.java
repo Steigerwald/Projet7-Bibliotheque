@@ -1,6 +1,5 @@
 package com.bibliotheque.entity.dto;
 
-import com.bibliotheque.entity.Reservation;
 import lombok.Data;
 import java.util.Date;
 
