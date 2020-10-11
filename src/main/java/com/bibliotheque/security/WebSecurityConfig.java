@@ -39,28 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(passwordEncoder());
     }
 
-    // Pour annuler les autorisations sur les ressources
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web
-                .ignoring()
-                .antMatchers("/livre/","/bibliotheque/","/resources/**", "/static/**", "/css/**", "/js/**", "/pictures/**");
 
-    }
-/*
-    // le gros de la configuration est ici
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-
-        http
-                .authorizeRequests().anyRequest().permitAll()
-                .and()
-                .httpBasic()
-                .and()
-                .csrf().disable()
-                .formLogin().disable();
-    }
-        */
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -68,6 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
+                .antMatchers(HttpMethod.GET, "/livre/*").permitAll()
                 .anyRequest().authenticated();
     }
 }
