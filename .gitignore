@@ -6,8 +6,8 @@
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
-/target/
+target/**/*
 # Intellij
-.idea/
+.idea/*
 *.iml
 *.iws
