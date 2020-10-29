@@ -2,10 +2,7 @@ package com.bibliotheque.entity.dto;
 
 import lombok.Data;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.TimeZone;
 
 @Data
 public class LivreDTO {
@@ -22,25 +19,4 @@ public class LivreDTO {
     private Boolean disponibilite;
     private ReservationDTO reservation;
 
-    public String getPublication() {
-        SimpleDateFormat dateFormat
-                = new SimpleDateFormat("yyyy-MM");
-        String dateString = dateFormat.format(publication);
-        return dateString;
-    }
-
-    public String getDateAchat() {
-        SimpleDateFormat dateFormat
-                = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        String dateString = dateFormat.format(dateAchat);
-        return dateString;
-    }
-
-    public String getDisponibilite() {
-        if (disponibilite){
-            return "oui";
-        } else{
-            return "non";
-        }
-    }
 }
