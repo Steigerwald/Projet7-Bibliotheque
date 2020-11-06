@@ -8,8 +8,6 @@ import com.bibliotheque.entity.dto.LivreDTO;
 import com.bibliotheque.entity.dto.ReservationDTO;
 import com.bibliotheque.entity.dto.RoleDTO;
 import com.bibliotheque.entity.dto.UserDTO;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
@@ -17,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-10-24T14:11:53+0200",
+    date = "2020-11-05T02:05:24+0100",
     comments = "version: 1.3.1.Final, compiler: javac, environment: Java 11.0.6 (Oracle Corporation)"
 )
 @Component
@@ -34,30 +32,14 @@ public class LivreMapperImpl implements LivreMapper {
         livre.setIdLivre( dto.getIdLivre() );
         livre.setTitre( dto.getTitre() );
         livre.setAuteur( dto.getAuteur() );
-        try {
-            if ( dto.getPublication() != null ) {
-                livre.setPublication( new SimpleDateFormat().parse( dto.getPublication() ) );
-            }
-        }
-        catch ( ParseException e ) {
-            throw new RuntimeException( e );
-        }
+        livre.setPublication( dto.getPublication() );
         livre.setResume( dto.getResume() );
         livre.setNombrePages( dto.getNombrePages() );
         livre.setNomCategorie( dto.getNomCategorie() );
-        try {
-            if ( dto.getDateAchat() != null ) {
-                livre.setDateAchat( new SimpleDateFormat().parse( dto.getDateAchat() ) );
-            }
-        }
-        catch ( ParseException e ) {
-            throw new RuntimeException( e );
-        }
+        livre.setDateAchat( dto.getDateAchat() );
         livre.setPrixLocation( dto.getPrixLocation() );
         livre.setEtatLivre( dto.getEtatLivre() );
-        if ( dto.getDisponibilite() != null ) {
-            livre.setDisponibilite( Boolean.parseBoolean( dto.getDisponibilite() ) );
-        }
+        livre.setDisponibilite( dto.getDisponibilite() );
         livre.setReservation( reservationDTOToReservation( dto.getReservation() ) );
 
         return livre;
