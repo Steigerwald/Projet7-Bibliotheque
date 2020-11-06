@@ -1,11 +1,9 @@
 package com.bibliotheque.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.List;
 
 

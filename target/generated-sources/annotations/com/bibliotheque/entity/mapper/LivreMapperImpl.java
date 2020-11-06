@@ -1,9 +1,11 @@
 package com.bibliotheque.entity.mapper;
 
+import com.bibliotheque.entity.Bibliotheque;
 import com.bibliotheque.entity.Livre;
 import com.bibliotheque.entity.Reservation;
 import com.bibliotheque.entity.Role;
 import com.bibliotheque.entity.User;
+import com.bibliotheque.entity.dto.BibliothequeDTO;
 import com.bibliotheque.entity.dto.LivreDTO;
 import com.bibliotheque.entity.dto.ReservationDTO;
 import com.bibliotheque.entity.dto.RoleDTO;
@@ -15,7 +17,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-11-05T02:05:24+0100",
+    date = "2020-11-06T23:47:08+0100",
     comments = "version: 1.3.1.Final, compiler: javac, environment: Java 11.0.6 (Oracle Corporation)"
 )
 @Component
@@ -41,6 +43,7 @@ public class LivreMapperImpl implements LivreMapper {
         livre.setEtatLivre( dto.getEtatLivre() );
         livre.setDisponibilite( dto.getDisponibilite() );
         livre.setReservation( reservationDTOToReservation( dto.getReservation() ) );
+        livre.setBibliotheque( bibliothequeDTOToBibliotheque( dto.getBibliotheque() ) );
 
         return livre;
     }
@@ -65,6 +68,7 @@ public class LivreMapperImpl implements LivreMapper {
         livreDTO.setEtatLivre( entity.getEtatLivre() );
         livreDTO.setDisponibilite( entity.getDisponibilite() );
         livreDTO.setReservation( reservationToReservationDTO( entity.getReservation() ) );
+        livreDTO.setBibliotheque( bibliothequeToBibliothequeDTO( entity.getBibliotheque() ) );
 
         return livreDTO;
     }
@@ -147,6 +151,21 @@ public class LivreMapperImpl implements LivreMapper {
         return reservation;
     }
 
+    protected Bibliotheque bibliothequeDTOToBibliotheque(BibliothequeDTO bibliothequeDTO) {
+        if ( bibliothequeDTO == null ) {
+            return null;
+        }
+
+        Bibliotheque bibliotheque = new Bibliotheque();
+
+        bibliotheque.setIdBibliotheque( bibliothequeDTO.getIdBibliotheque() );
+        bibliotheque.setNomBibliotheque( bibliothequeDTO.getNomBibliotheque() );
+        bibliotheque.setLieu( bibliothequeDTO.getLieu() );
+        bibliotheque.setAdresse( bibliothequeDTO.getAdresse() );
+
+        return bibliotheque;
+    }
+
     protected RoleDTO roleToRoleDTO(Role role) {
         if ( role == null ) {
             return null;
@@ -195,5 +214,20 @@ public class LivreMapperImpl implements LivreMapper {
         reservationDTO.setUser( userToUserDTO( reservation.getUser() ) );
 
         return reservationDTO;
+    }
+
+    protected BibliothequeDTO bibliothequeToBibliothequeDTO(Bibliotheque bibliotheque) {
+        if ( bibliotheque == null ) {
+            return null;
+        }
+
+        BibliothequeDTO bibliothequeDTO = new BibliothequeDTO();
+
+        bibliothequeDTO.setIdBibliotheque( bibliotheque.getIdBibliotheque() );
+        bibliothequeDTO.setNomBibliotheque( bibliotheque.getNomBibliotheque() );
+        bibliothequeDTO.setLieu( bibliotheque.getLieu() );
+        bibliothequeDTO.setAdresse( bibliotheque.getAdresse() );
+
+        return bibliothequeDTO;
     }
 }

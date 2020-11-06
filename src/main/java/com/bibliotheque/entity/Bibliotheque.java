@@ -1,6 +1,5 @@
 package com.bibliotheque.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import org.springframework.lang.Nullable;
 
@@ -35,4 +34,5 @@ public class Bibliotheque {
             inverseJoinColumns = @JoinColumn(name = "users_id_user"))
     @Nullable
     private List<User> users;
+
 }

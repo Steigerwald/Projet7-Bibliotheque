@@ -1,7 +1,6 @@
 package com.bibliotheque.entity.dto;
 
 import lombok.Data;
-
 import java.util.Date;
 
 @Data
@@ -19,5 +18,4 @@ public class LivreDTO {
     private Boolean disponibilite;
     private ReservationDTO reservation;
     private BibliothequeDTO bibliotheque;
-
 }
