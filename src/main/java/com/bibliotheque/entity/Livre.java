@@ -52,6 +52,7 @@ public class Livre {
     private Reservation reservation;
 
     @ManyToOne
+    @Nullable
     private Bibliotheque bibliotheque;
 
 }

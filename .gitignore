@@ -6,7 +6,14 @@
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
+
+target/
+target/**
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
 target/**/*
+
 # Intellij
 .idea/*
 *.iml
