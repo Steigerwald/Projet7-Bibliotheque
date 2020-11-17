@@ -32,6 +32,9 @@ public class Reservation {
     @Column(name="DELAI_LOCATION")
     private int delaiDeLocation;
 
+    @Column (name="PROLONGATION")
+    private Boolean prolongation;
+
     @Column(name="ISACTIF")
     private Boolean isactif;
 

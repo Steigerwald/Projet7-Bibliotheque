@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-11-12T22:54:50+0100",
+    date = "2020-11-17T18:41:49+0100",
     comments = "version: 1.3.1.Final, compiler: javac, environment: Java 11.0.6 (Oracle Corporation)"
 )
 @Component
@@ -32,6 +32,7 @@ public class ReservationMapperImpl implements ReservationMapper {
         reservation.setDateReservation( dto.getDateReservation() );
         reservation.setDateDeRetrait( dto.getDateDeRetrait() );
         reservation.setDelaiDeLocation( dto.getDelaiDeLocation() );
+        reservation.setProlongation( dto.getProlongation() );
         reservation.setIsactif( dto.getIsactif() );
         reservation.setUser( userDTOToUser( dto.getUser() ) );
 
@@ -51,6 +52,7 @@ public class ReservationMapperImpl implements ReservationMapper {
         reservationDTO.setDateReservation( entity.getDateReservation() );
         reservationDTO.setDateDeRetrait( entity.getDateDeRetrait() );
         reservationDTO.setDelaiDeLocation( entity.getDelaiDeLocation() );
+        reservationDTO.setProlongation( entity.getProlongation() );
         reservationDTO.setIsactif( entity.getIsactif() );
         reservationDTO.setUser( userToUserDTO( entity.getUser() ) );
 

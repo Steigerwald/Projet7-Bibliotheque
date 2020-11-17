@@ -11,6 +11,7 @@ public class ReservationDTO {
     private Date dateReservation;
     private Date dateDeRetrait;
     private int delaiDeLocation;
+    private Boolean prolongation;
     private Boolean isactif;
     private UserDTO user;
 }

@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-11-12T22:54:50+0100",
+    date = "2020-11-17T18:41:49+0100",
     comments = "version: 1.3.1.Final, compiler: javac, environment: Java 11.0.6 (Oracle Corporation)"
 )
 @Component
@@ -145,6 +145,7 @@ public class LivreMapperImpl implements LivreMapper {
         reservation.setDateReservation( reservationDTO.getDateReservation() );
         reservation.setDateDeRetrait( reservationDTO.getDateDeRetrait() );
         reservation.setDelaiDeLocation( reservationDTO.getDelaiDeLocation() );
+        reservation.setProlongation( reservationDTO.getProlongation() );
         reservation.setIsactif( reservationDTO.getIsactif() );
         reservation.setUser( userDTOToUser( reservationDTO.getUser() ) );
 
@@ -210,6 +211,7 @@ public class LivreMapperImpl implements LivreMapper {
         reservationDTO.setDateReservation( reservation.getDateReservation() );
         reservationDTO.setDateDeRetrait( reservation.getDateDeRetrait() );
         reservationDTO.setDelaiDeLocation( reservation.getDelaiDeLocation() );
+        reservationDTO.setProlongation( reservation.getProlongation() );
         reservationDTO.setIsactif( reservation.getIsactif() );
         reservationDTO.setUser( userToUserDTO( reservation.getUser() ) );
 

@@ -42,8 +42,9 @@ public class ReservationService {
         Date today = new Date();
         entity.setDateDeRetrait(null);
         entity.setDateReservation(today);
-        entity.setDelaiDeLocation(15);
+        entity.setDelaiDeLocation(28);
         entity.setEtatReservation("En attente confirmation");
+        entity.setProlongation(false);
         entity.setIsactif(true);
         //enregistrement de la reservation dans la basse de données
         logger.info(" retour de l'entité newReservation de createBReservation qui a été créée et sauvegardée");
