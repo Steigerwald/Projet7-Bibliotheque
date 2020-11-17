@@ -40,6 +40,8 @@ public class ReservationService {
     /*Methode pour creer une reservation dans la base de données*/
     public Reservation createReservation(Reservation entity) throws RecordNotFoundException {
         Date today = new Date();
+        Reservation newReservation = new Reservation();
+        entity.setIdReservation(newReservation.getIdReservation());
         entity.setDateDeRetrait(null);
         entity.setDateReservation(today);
         entity.setDelaiDeLocation(28);
