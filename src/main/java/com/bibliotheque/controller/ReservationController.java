@@ -72,4 +72,12 @@ public class ReservationController {
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
+    /* controller pour avoir toutes les reservations à valider*/
+    @RequestMapping(path ="/AValider",method = RequestMethod.GET)
+    public ResponseEntity<List<ReservationDTO> >listOfReservationsAValider() {
+        List<Reservation> toutesReservations =reservationService.findAllAValider();
+        return new ResponseEntity<>(reservationMapper.toDto(toutesReservations), HttpStatus.OK);
+    }
+
+
 }

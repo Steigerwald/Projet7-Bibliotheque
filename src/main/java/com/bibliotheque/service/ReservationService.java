@@ -22,7 +22,8 @@ public class ReservationService {
 
     /*Methode pour avoir toutes les reservations actives de la base de données*/
     public List<Reservation> findAll() {
-        return reservationRepository.findAllAndAndIsactif();
+        //return reservationRepository.findAllAndIsactif();
+        return reservationRepository.findAll();
     }
 
     /*Methode pour trouver par son id une reservation dans la base de données*/
@@ -91,7 +92,11 @@ public class ReservationService {
         }
     }
 
-
+    /*Methode pour avoir toutes les reservations à valider de la base de données*/
+    public List<Reservation> findAllAValider() {
+        String etatEnCours = "En attente confirmation";
+        return reservationRepository.findAllByEtatReservation(etatEnCours);
+    }
 
 
 
