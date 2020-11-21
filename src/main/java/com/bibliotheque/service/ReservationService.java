@@ -20,9 +20,9 @@ public class ReservationService {
     @Autowired
     ReservationRepository reservationRepository;
 
-    /*Methode pour avoir toutes les reservations de la base de données*/
+    /*Methode pour avoir toutes les reservations actives de la base de données*/
     public List<Reservation> findAll() {
-        return reservationRepository.findAll();
+        return reservationRepository.findAllAndAndIsactif();
     }
 
     /*Methode pour trouver par son id une reservation dans la base de données*/
