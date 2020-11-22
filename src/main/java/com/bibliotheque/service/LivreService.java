@@ -49,6 +49,20 @@ public class LivreService {
         }
     }
 
+    /*Methode pour récupérer les livres d'une réservation dans la base de données*/
+    public List<Livre> getAllLivresByIdReservation(int idReservation){
+        List<Livre> listLivres=livreRepository.findAllByReservation_IdReservation(idReservation);
+        List<Livre> result2=new ArrayList<Livre>();
+        if(listLivres.size() > 0) {
+            logger.info(" retour liste result1 de tous les livres de la BD avec getAllLivresByIdReservation si taille >0 ");
+            return listLivres;
+        }else{
+            return result2;
+        }
+    }
+
+
+
     /*Methode pour sauvegarder un livre dans la base de données*/
     public void save(Livre livre) {
         logger.info(" l'id de newLivre vaut: "+livre.getIdLivre());

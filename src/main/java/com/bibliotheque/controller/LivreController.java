@@ -49,6 +49,14 @@ public class LivreController {
         }
     }
 
+    /* controller pour obtenir les livres par Idreservation */
+    @RequestMapping(path="/reservation/{id}",method = RequestMethod.GET)
+    public ResponseEntity<List<LivreDTO> > getAllLivresReservation(@PathVariable int id){
+        List<Livre> Livres = livreService.getAllLivresByIdReservation(id);
+        return new ResponseEntity<>(livreMapper.toDto(Livres), HttpStatus.OK);
+    }
+
+
     /* Controller pour la liste de tous les livres disponibles */
     @RequestMapping(path ="/disponibles",method = RequestMethod.GET)
     public ResponseEntity <List<LivreDTO>> getAllLivresDisponibles() {
