@@ -16,6 +16,5 @@ public class LivreDTO {
     private int prixLocation;
     private String etatLivre;
     private Boolean disponibilite;
-    private ReservationDTO reservation;
     private BibliothequeDTO bibliotheque;
 }

@@ -1,5 +1,6 @@
 package com.bibliotheque.entity.dto;
 
+import com.bibliotheque.entity.Livre;
 import lombok.Data;
 import java.util.Date;
 import java.util.List;
@@ -15,4 +16,5 @@ public class ReservationDTO {
     private Boolean prolongation;
     private Boolean isactif;
     private UserDTO user;
+    private LivreDTO livre;
 }

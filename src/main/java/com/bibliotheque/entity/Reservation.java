@@ -41,7 +41,9 @@ public class Reservation {
     @ManyToOne
     private User user;
 
-    @OneToMany(mappedBy = "reservation",fetch=FetchType.LAZY,orphanRemoval = true)
-    private List<Livre> livres;
+    @ManyToOne
+    @Nullable
+    private Livre livre;
+
 
 }

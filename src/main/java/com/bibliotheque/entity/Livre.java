@@ -7,6 +7,7 @@ import org.springframework.lang.Nullable;
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table (name = "TBL_LIVRE")
@@ -49,10 +50,9 @@ public class Livre {
 
     @ManyToOne
     @Nullable
-    private Reservation reservation;
-
-    @ManyToOne
-    @Nullable
     private Bibliotheque bibliotheque;
+
+    @OneToMany(mappedBy = "livre",fetch=FetchType.LAZY)
+    private List<Reservation> reservations;
 
 }
