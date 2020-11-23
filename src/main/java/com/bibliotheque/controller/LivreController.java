@@ -37,7 +37,7 @@ public class LivreController {
         return new ResponseEntity<>(livreMapper.toDto(tousLivres), HttpStatus.OK);
     }
 
-    /* controller pour obtenir un livre */
+    /* controller pour obtenir un livre par id */
     @RequestMapping(path="/{id}",method = RequestMethod.GET)
     public ResponseEntity <LivreDTO> bookId(@PathVariable int id) {
         Livre leLivre =livreService.findById(id);
@@ -54,6 +54,20 @@ public class LivreController {
     public ResponseEntity <List<LivreDTO>> getAllLivresDisponibles() {
         List<Livre> LivresDispo = livreService.getAllLivresDisponibles();
         return new ResponseEntity<>(livreMapper.toDto(LivresDispo), HttpStatus.OK);
+    }
+
+    /* Controller pour la liste de tous les exemplaires d'un livre */
+    @RequestMapping(path ="/allExemplaires/{id}",method = RequestMethod.GET)
+    public ResponseEntity <List<LivreDTO>> getAllExemplaires(@PathVariable int id) {
+        List<Livre> exemplaires = livreService.getAllExemplairesDUnLivre(id);
+        return new ResponseEntity<>(livreMapper.toDto(exemplaires), HttpStatus.OK);
+    }
+
+    /* Controller pour la liste de tous les exemplaires disponibles d'un livre */
+    @RequestMapping(path ="/allExemplairesDisponibles/{id}",method = RequestMethod.GET)
+    public ResponseEntity <List<LivreDTO>> getAllExemplairesDisponibles(@PathVariable int id) {
+        List<Livre> exemplaires = livreService.getAllExemplairesDidponiblesDUnLivre(id);
+        return new ResponseEntity<>(livreMapper.toDto(exemplaires), HttpStatus.OK);
     }
 
 

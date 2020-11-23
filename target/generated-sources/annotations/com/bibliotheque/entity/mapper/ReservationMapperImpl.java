@@ -1,8 +1,12 @@
 package com.bibliotheque.entity.mapper;
 
+import com.bibliotheque.entity.Bibliotheque;
+import com.bibliotheque.entity.Livre;
 import com.bibliotheque.entity.Reservation;
 import com.bibliotheque.entity.Role;
 import com.bibliotheque.entity.User;
+import com.bibliotheque.entity.dto.BibliothequeDTO;
+import com.bibliotheque.entity.dto.LivreDTO;
 import com.bibliotheque.entity.dto.ReservationDTO;
 import com.bibliotheque.entity.dto.RoleDTO;
 import com.bibliotheque.entity.dto.UserDTO;
@@ -13,7 +17,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-11-22T17:05:53+0100",
+    date = "2020-11-23T23:16:18+0100",
     comments = "version: 1.3.1.Final, compiler: javac, environment: Java 11.0.6 (Oracle Corporation)"
 )
 @Component
@@ -35,6 +39,7 @@ public class ReservationMapperImpl implements ReservationMapper {
         reservation.setProlongation( dto.getProlongation() );
         reservation.setIsactif( dto.getIsactif() );
         reservation.setUser( userDTOToUser( dto.getUser() ) );
+        reservation.setLivre( livreDTOToLivre( dto.getLivre() ) );
 
         return reservation;
     }
@@ -55,6 +60,7 @@ public class ReservationMapperImpl implements ReservationMapper {
         reservationDTO.setProlongation( entity.getProlongation() );
         reservationDTO.setIsactif( entity.getIsactif() );
         reservationDTO.setUser( userToUserDTO( entity.getUser() ) );
+        reservationDTO.setLivre( livreToLivreDTO( entity.getLivre() ) );
 
         return reservationDTO;
     }
@@ -119,6 +125,44 @@ public class ReservationMapperImpl implements ReservationMapper {
         return user;
     }
 
+    protected Bibliotheque bibliothequeDTOToBibliotheque(BibliothequeDTO bibliothequeDTO) {
+        if ( bibliothequeDTO == null ) {
+            return null;
+        }
+
+        Bibliotheque bibliotheque = new Bibliotheque();
+
+        bibliotheque.setIdBibliotheque( bibliothequeDTO.getIdBibliotheque() );
+        bibliotheque.setNomBibliotheque( bibliothequeDTO.getNomBibliotheque() );
+        bibliotheque.setLieu( bibliothequeDTO.getLieu() );
+        bibliotheque.setAdresse( bibliothequeDTO.getAdresse() );
+
+        return bibliotheque;
+    }
+
+    protected Livre livreDTOToLivre(LivreDTO livreDTO) {
+        if ( livreDTO == null ) {
+            return null;
+        }
+
+        Livre livre = new Livre();
+
+        livre.setIdLivre( livreDTO.getIdLivre() );
+        livre.setTitre( livreDTO.getTitre() );
+        livre.setAuteur( livreDTO.getAuteur() );
+        livre.setPublication( livreDTO.getPublication() );
+        livre.setResume( livreDTO.getResume() );
+        livre.setNombrePages( livreDTO.getNombrePages() );
+        livre.setNomCategorie( livreDTO.getNomCategorie() );
+        livre.setDateAchat( livreDTO.getDateAchat() );
+        livre.setPrixLocation( livreDTO.getPrixLocation() );
+        livre.setEtatLivre( livreDTO.getEtatLivre() );
+        livre.setDisponibilite( livreDTO.getDisponibilite() );
+        livre.setBibliotheque( bibliothequeDTOToBibliotheque( livreDTO.getBibliotheque() ) );
+
+        return livre;
+    }
+
     protected RoleDTO roleToRoleDTO(Role role) {
         if ( role == null ) {
             return null;
@@ -149,5 +193,43 @@ public class ReservationMapperImpl implements ReservationMapper {
         userDTO.setRole( roleToRoleDTO( user.getRole() ) );
 
         return userDTO;
+    }
+
+    protected BibliothequeDTO bibliothequeToBibliothequeDTO(Bibliotheque bibliotheque) {
+        if ( bibliotheque == null ) {
+            return null;
+        }
+
+        BibliothequeDTO bibliothequeDTO = new BibliothequeDTO();
+
+        bibliothequeDTO.setIdBibliotheque( bibliotheque.getIdBibliotheque() );
+        bibliothequeDTO.setNomBibliotheque( bibliotheque.getNomBibliotheque() );
+        bibliothequeDTO.setLieu( bibliotheque.getLieu() );
+        bibliothequeDTO.setAdresse( bibliotheque.getAdresse() );
+
+        return bibliothequeDTO;
+    }
+
+    protected LivreDTO livreToLivreDTO(Livre livre) {
+        if ( livre == null ) {
+            return null;
+        }
+
+        LivreDTO livreDTO = new LivreDTO();
+
+        livreDTO.setIdLivre( livre.getIdLivre() );
+        livreDTO.setTitre( livre.getTitre() );
+        livreDTO.setAuteur( livre.getAuteur() );
+        livreDTO.setPublication( livre.getPublication() );
+        livreDTO.setResume( livre.getResume() );
+        livreDTO.setNombrePages( livre.getNombrePages() );
+        livreDTO.setNomCategorie( livre.getNomCategorie() );
+        livreDTO.setDateAchat( livre.getDateAchat() );
+        livreDTO.setPrixLocation( livre.getPrixLocation() );
+        livreDTO.setEtatLivre( livre.getEtatLivre() );
+        livreDTO.setDisponibilite( livre.getDisponibilite() );
+        livreDTO.setBibliotheque( bibliothequeToBibliothequeDTO( livre.getBibliotheque() ) );
+
+        return livreDTO;
     }
 }

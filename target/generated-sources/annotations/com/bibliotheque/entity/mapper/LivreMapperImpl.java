@@ -2,14 +2,8 @@ package com.bibliotheque.entity.mapper;
 
 import com.bibliotheque.entity.Bibliotheque;
 import com.bibliotheque.entity.Livre;
-import com.bibliotheque.entity.Reservation;
-import com.bibliotheque.entity.Role;
-import com.bibliotheque.entity.User;
 import com.bibliotheque.entity.dto.BibliothequeDTO;
 import com.bibliotheque.entity.dto.LivreDTO;
-import com.bibliotheque.entity.dto.ReservationDTO;
-import com.bibliotheque.entity.dto.RoleDTO;
-import com.bibliotheque.entity.dto.UserDTO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
@@ -17,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-11-22T17:05:53+0100",
+    date = "2020-11-23T23:16:18+0100",
     comments = "version: 1.3.1.Final, compiler: javac, environment: Java 11.0.6 (Oracle Corporation)"
 )
 @Component
@@ -42,7 +36,6 @@ public class LivreMapperImpl implements LivreMapper {
         livre.setPrixLocation( dto.getPrixLocation() );
         livre.setEtatLivre( dto.getEtatLivre() );
         livre.setDisponibilite( dto.getDisponibilite() );
-        livre.setReservation( reservationDTOToReservation( dto.getReservation() ) );
         livre.setBibliotheque( bibliothequeDTOToBibliotheque( dto.getBibliotheque() ) );
 
         return livre;
@@ -67,7 +60,6 @@ public class LivreMapperImpl implements LivreMapper {
         livreDTO.setPrixLocation( entity.getPrixLocation() );
         livreDTO.setEtatLivre( entity.getEtatLivre() );
         livreDTO.setDisponibilite( entity.getDisponibilite() );
-        livreDTO.setReservation( reservationToReservationDTO( entity.getReservation() ) );
         livreDTO.setBibliotheque( bibliothequeToBibliothequeDTO( entity.getBibliotheque() ) );
 
         return livreDTO;
@@ -101,57 +93,6 @@ public class LivreMapperImpl implements LivreMapper {
         return list;
     }
 
-    protected Role roleDTOToRole(RoleDTO roleDTO) {
-        if ( roleDTO == null ) {
-            return null;
-        }
-
-        Role role = new Role();
-
-        role.setIdRole( roleDTO.getIdRole() );
-        role.setNomRole( roleDTO.getNomRole() );
-        role.setActifRole( roleDTO.getActifRole() );
-
-        return role;
-    }
-
-    protected User userDTOToUser(UserDTO userDTO) {
-        if ( userDTO == null ) {
-            return null;
-        }
-
-        User user = new User();
-
-        user.setIdUser( userDTO.getIdUser() );
-        user.setNomUser( userDTO.getNomUser() );
-        user.setPrenomUser( userDTO.getPrenomUser() );
-        user.setMailUser( userDTO.getMailUser() );
-        user.setMotDePasse( userDTO.getMotDePasse() );
-        user.setActifUser( userDTO.getActifUser() );
-        user.setRole( roleDTOToRole( userDTO.getRole() ) );
-
-        return user;
-    }
-
-    protected Reservation reservationDTOToReservation(ReservationDTO reservationDTO) {
-        if ( reservationDTO == null ) {
-            return null;
-        }
-
-        Reservation reservation = new Reservation();
-
-        reservation.setIdReservation( reservationDTO.getIdReservation() );
-        reservation.setEtatReservation( reservationDTO.getEtatReservation() );
-        reservation.setDateReservation( reservationDTO.getDateReservation() );
-        reservation.setDateDeRetrait( reservationDTO.getDateDeRetrait() );
-        reservation.setDelaiDeLocation( reservationDTO.getDelaiDeLocation() );
-        reservation.setProlongation( reservationDTO.getProlongation() );
-        reservation.setIsactif( reservationDTO.getIsactif() );
-        reservation.setUser( userDTOToUser( reservationDTO.getUser() ) );
-
-        return reservation;
-    }
-
     protected Bibliotheque bibliothequeDTOToBibliotheque(BibliothequeDTO bibliothequeDTO) {
         if ( bibliothequeDTO == null ) {
             return null;
@@ -165,57 +106,6 @@ public class LivreMapperImpl implements LivreMapper {
         bibliotheque.setAdresse( bibliothequeDTO.getAdresse() );
 
         return bibliotheque;
-    }
-
-    protected RoleDTO roleToRoleDTO(Role role) {
-        if ( role == null ) {
-            return null;
-        }
-
-        RoleDTO roleDTO = new RoleDTO();
-
-        roleDTO.setIdRole( role.getIdRole() );
-        roleDTO.setNomRole( role.getNomRole() );
-        roleDTO.setActifRole( role.getActifRole() );
-
-        return roleDTO;
-    }
-
-    protected UserDTO userToUserDTO(User user) {
-        if ( user == null ) {
-            return null;
-        }
-
-        UserDTO userDTO = new UserDTO();
-
-        userDTO.setIdUser( user.getIdUser() );
-        userDTO.setNomUser( user.getNomUser() );
-        userDTO.setPrenomUser( user.getPrenomUser() );
-        userDTO.setMailUser( user.getMailUser() );
-        userDTO.setMotDePasse( user.getMotDePasse() );
-        userDTO.setActifUser( user.getActifUser() );
-        userDTO.setRole( roleToRoleDTO( user.getRole() ) );
-
-        return userDTO;
-    }
-
-    protected ReservationDTO reservationToReservationDTO(Reservation reservation) {
-        if ( reservation == null ) {
-            return null;
-        }
-
-        ReservationDTO reservationDTO = new ReservationDTO();
-
-        reservationDTO.setIdReservation( reservation.getIdReservation() );
-        reservationDTO.setEtatReservation( reservation.getEtatReservation() );
-        reservationDTO.setDateReservation( reservation.getDateReservation() );
-        reservationDTO.setDateDeRetrait( reservation.getDateDeRetrait() );
-        reservationDTO.setDelaiDeLocation( reservation.getDelaiDeLocation() );
-        reservationDTO.setProlongation( reservation.getProlongation() );
-        reservationDTO.setIsactif( reservation.getIsactif() );
-        reservationDTO.setUser( userToUserDTO( reservation.getUser() ) );
-
-        return reservationDTO;
     }
 
     protected BibliothequeDTO bibliothequeToBibliothequeDTO(Bibliotheque bibliotheque) {
