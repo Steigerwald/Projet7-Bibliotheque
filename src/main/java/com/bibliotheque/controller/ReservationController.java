@@ -79,5 +79,13 @@ public class ReservationController {
         return new ResponseEntity<>(reservationMapper.toDto(toutesReservations), HttpStatus.OK);
     }
 
+    /* controller pour avoir toutes les reservations en attente*/
+    @RequestMapping(path ="/EnCours",method = RequestMethod.GET)
+    public ResponseEntity<List<ReservationDTO> >listOfReservationsEnCours() {
+        List<Reservation> toutesReservations =reservationService.findAllEnCours();
+        return new ResponseEntity<>(reservationMapper.toDto(toutesReservations), HttpStatus.OK);
+    }
+
+
 
 }

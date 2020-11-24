@@ -98,6 +98,12 @@ public class ReservationService {
         return reservationRepository.findAllByEtatReservation(etatEnCours);
     }
 
+    /*Methode pour avoir toutes les reservations en cours de la base de données*/
+    public List<Reservation> findAllEnCours() {
+        String etatEnCours = "En cours de pret";
+        return reservationRepository.findAllByEtatReservation(etatEnCours);
+    }
+
 
 
 }

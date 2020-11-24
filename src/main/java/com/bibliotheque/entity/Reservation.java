@@ -29,6 +29,11 @@ public class Reservation {
     @Nullable
     private Date dateDeRetrait;
 
+    @Temporal(value = TemporalType.TIMESTAMP)
+    @Column(name="DATE_RETOUR")
+    @Nullable
+    private Date dateDeRetour;
+
     @Column(name="DELAI_LOCATION")
     private int delaiDeLocation;
 
