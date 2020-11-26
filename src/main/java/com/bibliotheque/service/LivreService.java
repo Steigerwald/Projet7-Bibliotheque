@@ -17,6 +17,8 @@ import java.util.Optional;
 @Service
 public class LivreService {
 
+    public boolean present;
+
     Logger logger = (Logger) LoggerFactory.getLogger(LivreService.class);
 
     @Autowired
@@ -24,6 +26,33 @@ public class LivreService {
 
     /*Methode pour avoir tous les livres de la base de données*/
     public List<Livre> findAll() { return livreRepository.findAll(); }
+
+    /*Methode pour obtenir tous les livres en un seul exemplaire disponibles de la base de données*/
+    public List<Livre> getAllExemplairesDisponiblesEnUnSeulExemplaire() {
+        List<Livre> result1 = livreRepository.findAll();
+        List<Livre> result2=new ArrayList<Livre>();
+        if(result1.size() > 0) {
+            logger.info(" retour liste result1 de tous les livres de la BD avec getAllLivresDisponoibles si taille de result1 >0 ");
+            present=false;
+            for (int i=0;i<result1.size();i=i+1){
+                //if (result1.get(i).getDisponibilite()) {
+                    for (int j=0;j<result2.size();j=j+1){
+                        if (result1.get(i).getTitre().equals(result2.get(j).getTitre())) {
+                            present=true;
+                        }
+                    }
+                    if (!present){
+                        result2.add(result1.get(i));
+                    }
+                }
+            }
+        //logger.info(" retour de la liste result2 "+result2);
+            return result2;
+        //} else {
+            //logger.info(" retour nouvelle liste des Livres Disponibles car pas d'élément dans la liste result1 ");
+           /// return result2;
+        //}
+    }
 
 
     /*Methode pour trouver par son id un livre dans la base de données*/
@@ -78,13 +107,6 @@ public class LivreService {
             return result2;
         }
     }
-
-
-
-
-
-
-
 
     /*Methode pour sauvegarder un livre dans la base de données*/
     public void save(Livre livre) {

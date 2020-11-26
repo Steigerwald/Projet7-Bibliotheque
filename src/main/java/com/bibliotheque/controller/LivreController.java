@@ -30,12 +30,20 @@ public class LivreController {
     SearchMapper searchMapper;
 
 
-    /* controller pour avoir tous les livres*/
+    /* controller pour avoir tous les livres par exemplaire*/
     @RequestMapping(path ="/",method = RequestMethod.GET)
     public ResponseEntity<List<LivreDTO> >listOfBooks() {
+        List<Livre> tousLivres=livreService.getAllExemplairesDisponiblesEnUnSeulExemplaire();
+        return new ResponseEntity<>(livreMapper.toDto(tousLivres), HttpStatus.OK);
+    }
+
+    /* controller pour avoir tous les livres mais en gardant un seul exemplaire*/
+    @RequestMapping(path ="/LivresParTitre",method = RequestMethod.GET)
+    public ResponseEntity<List<LivreDTO> >listOfBooksByTitre() {
         List<Livre> tousLivres=livreService.findAll();
         return new ResponseEntity<>(livreMapper.toDto(tousLivres), HttpStatus.OK);
     }
+
 
     /* controller pour obtenir un livre par id */
     @RequestMapping(path="/{id}",method = RequestMethod.GET)
