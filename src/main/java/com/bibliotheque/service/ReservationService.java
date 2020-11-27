@@ -105,5 +105,33 @@ public class ReservationService {
     }
 
 
+    /*Methode pour vérifier la validité de la date de location d'un livre*/
+    public boolean verfierDateDeRetrait (Reservation entity){
+        Date today = new Date();
+        int delaiDeRetour =entity.getDelaiDeLocation();
+        if (entity.getProlongation()){
+            delaiDeRetour = delaiDeRetour*2;
+        }
+        boolean result=true;
+        if (entity.getDateDeRetrait()!=null) {
+            Date diff = new Date(today.getTime() - entity.getDateDeRetrait().getTime());
+            int nombreJours = (int)(diff.getTime()/1000/3600/24);
+            logger.info("nombreJours de la différence: "+nombreJours);
+            if (nombreJours > entity.getDelaiDeLocation()){
+                result=false;
+            } else{
+                result=true;
+            }
+        }
+        return result;
+    }
+
+    /*Methode pour modifier l'etat de la commande en fonction la validité de la date de location d'un livre*/
+    public Reservation verifierEtatReservation (Reservation entity){
+        if (!(verfierDateDeRetrait(entity))){
+            entity.setEtatReservation("delai depasse");
+        }
+        return entity;
+    }
 
 }

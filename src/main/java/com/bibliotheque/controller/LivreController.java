@@ -49,7 +49,6 @@ public class LivreController {
     @RequestMapping(path="/{id}",method = RequestMethod.GET)
     public ResponseEntity <LivreDTO> bookId(@PathVariable int id) {
         Livre leLivre =livreService.findById(id);
-        // mettre le if
         if (leLivre==null){
             return new ResponseEntity<>(livreMapper.toDto(leLivre), HttpStatus.NOT_FOUND);
         } else {

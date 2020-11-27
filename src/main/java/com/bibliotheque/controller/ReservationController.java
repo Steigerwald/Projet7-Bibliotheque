@@ -86,6 +86,12 @@ public class ReservationController {
         return new ResponseEntity<>(reservationMapper.toDto(toutesReservations), HttpStatus.OK);
     }
 
-
+    /* controller pour verifier la validité du délai de location d'une réservation*/
+    @RequestMapping(path = "/verifierReservation",method = RequestMethod.PUT,produces = "application/json")
+    public ResponseEntity<ReservationDTO> verifierReservation(@RequestBody ReservationDTO reservationAVerifierDTO){
+        Reservation reservationAVerifier = reservationMapper.toEntity(reservationAVerifierDTO);
+        ReservationDTO dto =reservationMapper.toDto(reservationService.verifierEtatReservation(reservationAVerifier));
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
 
 }
