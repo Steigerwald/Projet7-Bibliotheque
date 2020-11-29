@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
     List<Reservation> findAllByEtatReservation(String etatReservation);
+    List<Reservation> findAllByEtatReservationOrIsactif(String etatReservation,Boolean actif);
 }

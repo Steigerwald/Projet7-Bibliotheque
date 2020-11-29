@@ -101,7 +101,7 @@ public class ReservationService {
     /*Methode pour avoir toutes les reservations en cours de la base de données*/
     public List<Reservation> findAllEnCours() {
         String etatEnCours = "En cours de pret";
-        return reservationRepository.findAllByEtatReservation(etatEnCours);
+        return reservationRepository.findAllByEtatReservationOrIsactif(etatEnCours,true);
     }
 
 
@@ -130,6 +130,7 @@ public class ReservationService {
     public Reservation verifierEtatReservation (Reservation entity){
         if (!(verfierDateDeRetrait(entity))){
             entity.setEtatReservation("delai depasse");
+            reservationRepository.save(entity);
         }
         return entity;
     }
