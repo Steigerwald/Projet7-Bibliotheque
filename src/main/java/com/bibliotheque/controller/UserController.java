@@ -7,6 +7,7 @@ import com.bibliotheque.entity.dto.UserDTO;
 import com.bibliotheque.entity.mapper.RoleMapper;
 import com.bibliotheque.entity.mapper.UserMapper;
 import com.bibliotheque.exception.RecordNotFoundException;
+import com.bibliotheque.form.LoginForm;
 import com.bibliotheque.service.CustomUserDetailsService;
 import com.bibliotheque.service.UserService;
 import io.jsonwebtoken.Jwts;
@@ -39,12 +40,14 @@ public class UserController {
     @Autowired
     public RoleMapper roleMapper;
 
+
     /* controller login pour se connecter*/
     @RequestMapping(path="login",method=RequestMethod.POST)
-    public String login(@RequestParam("user") String username) {
-        String token = getJWTToken(username);
+    @ResponseBody
+    public String login(@RequestBody LoginForm user) {
+        String token = getJWTToken(user.getUser());
         User userConnecte = new User();
-        userConnecte.setMailUser(username);
+        userConnecte.setMailUser(user.getUser());
         return token;
     }
 
@@ -52,7 +55,6 @@ public class UserController {
         String secretKey = "mySecretKey";
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils
                 .commaSeparatedStringToAuthorityList("ROLE_USER");
-
         String token = Jwts
                 .builder()
                 .setId("softtekJWT")
@@ -62,15 +64,13 @@ public class UserController {
                                 .map(GrantedAuthority::getAuthority)
                                 .collect(Collectors.toList()))
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 600000))
+                .setExpiration(new Date(System.currentTimeMillis() + 600000000))
                 .signWith(SignatureAlgorithm.HS512, secretKey.getBytes()).compact();
         return "Bearer " + token;
     }
 
-
     @RequestMapping(path="user/me",method=RequestMethod.POST)
     public ResponseEntity<UserDTO> userConnecte(@RequestParam("username") String username) {
-
         User userConcerne = userService.getUserByMail(username);
         if (userConcerne==null){
             return new ResponseEntity<>(userMapper.toDto(userConcerne), HttpStatus.NOT_FOUND);
@@ -78,7 +78,6 @@ public class UserController {
             return new ResponseEntity<>(userMapper.toDto(userConcerne), HttpStatus.OK);
         }
     }
-
 
     /* controller pour avoir tous les users*/
     @RequestMapping(path="users/",method=RequestMethod.GET)
