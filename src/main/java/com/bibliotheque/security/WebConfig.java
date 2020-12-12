@@ -15,11 +15,14 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Autowired
     private MessageSource messageSource;
+
 /*
+    //Remplace les controlleurs
     @Override
     public void addViewControllers(ViewControllerRegistry registry)
     {
-        //registry.addViewController("/").setViewName("entree");
+        registry.addViewController("/login").setViewName("UserLogin");
+        registry.addViewController("/logout").setViewName("UserLogin");
         //registry.addViewController("/login").setViewName("login-view");
         //registry.addViewController("/home").setViewName("home");
         //registry.addViewController("/admin/users").setViewName("list-users");
@@ -27,14 +30,15 @@ public class WebConfig implements WebMvcConfigurer {
         //registry.addViewController("/registration").setViewName("registration-view");
         //registry.addViewController("/registration/create").setViewName("success");
     }
-/*
+
     @Override
     public Validator getValidator() {
         LocalValidatorFactoryBean factory = new LocalValidatorFactoryBean();
         factory.setValidationMessageSource(messageSource);
         return factory;
     }
-*/
+
+ */
     @Bean
     public SpringSecurityDialect securityDialect() {
         return new SpringSecurityDialect();

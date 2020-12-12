@@ -17,6 +17,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import javax.sql.DataSource;
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, proxyTargetClass = true)
@@ -30,25 +32,33 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    // Pour l'identification
+    // Injection de l'identification
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    public void configureGlobal(AuthenticationManagerBuilder auth, DataSource dataSource) throws Exception {
 
+        auth.jdbcAuthentication()
+                .dataSource(dataSource);
         auth
                 .userDetailsService(customUserDetailsService)
                 .passwordEncoder(passwordEncoder());
     }
 
 
+    // Les règles de sécurité
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/login","/livre/search","/livre/addLivre","/livre/exemplairesDisponibles","/reservation/addReservation","/user/me").permitAll()
+                .antMatchers(HttpMethod.POST, "/livre/search","/livre/addLivre","/livre/exemplairesDisponibles","/reservation/addReservation","/user/me").permitAll()
                 .antMatchers(HttpMethod.GET, "/livre/*","/livre/allExemplaires/*","/livre/allExemplairesDisponibles/*","/user/*","/users/","/bibliotheque/*","/reservation/*").permitAll()
                 .antMatchers(HttpMethod.DELETE,"/livre/*").permitAll()
                 .antMatchers(HttpMethod.PUT,"/livre/","/reservation/","/reservation/verifierReservation").permitAll()
-                .anyRequest().authenticated();
+                .anyRequest().authenticated()
+                    .and()
+                .formLogin()
+                    .loginPage("/login")
+                    .permitAll();
+                //.defaultSuccessUrl("index.html");
     }
 }

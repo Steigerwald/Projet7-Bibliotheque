@@ -17,10 +17,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.List;
+import javax.servlet.http.HttpSession;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -42,13 +43,19 @@ public class UserController {
 
 
     /* controller login pour se connecter*/
-    @RequestMapping(path="login",method=RequestMethod.POST)
+    @RequestMapping(path="login",method=RequestMethod.PUT)
     @ResponseBody
     public String login(@RequestBody LoginForm user) {
-        String token = getJWTToken(user.getUser());
-        User userConnecte = new User();
-        userConnecte.setMailUser(user.getUser());
-        return token;
+        customUserDetailsService.loadUserByUsername(user.getUserName());
+        User userTrouve = userService.getUserByMail(user.getUserName());
+        if (userTrouve != null) {
+            String token = getJWTToken(user.getUserName());
+            User userConnecte = new User();
+            userConnecte.setMailUser(user.getUserName());
+            return token;
+        } else {
+            return "not found";
+        }
     }
 
     private String getJWTToken(String username) {
@@ -146,5 +153,23 @@ public class UserController {
         Role leRole=userService.getRoleById(id);
         return new ResponseEntity<>(roleMapper.toDto(leRole), HttpStatus.OK);
     }
+
+    /* controller pour avoir le user connecté */
+    @RequestMapping(path="getLogedUser",method=RequestMethod.GET)
+    public Map<String,Object> getLogedUser (HttpSession session){
+        SecurityContext securityContext = (SecurityContext)session.getAttribute("SPRING_SECURITY_CONTEXT");
+        String username =securityContext.getAuthentication().getName();
+        List<String> roles=new ArrayList<>();
+        for(GrantedAuthority ga:securityContext.getAuthentication().getAuthorities()){
+        roles.add(ga.getAuthority());
+        }
+        Map<String,Object> params=new HashMap<>();
+        params.put("username",username);
+        params.put("roles",roles);
+        return params;
+    }
+
+
+
 
 }

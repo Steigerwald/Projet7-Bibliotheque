@@ -5,7 +5,6 @@ com/bibliotheque/entity/Reservation.class
 com/bibliotheque/entity/Role.class
 com/bibliotheque/entity/mapper/RoleMapperImpl.class
 com/bibliotheque/entity/Livre.class
-com/bibliotheque/security/WebConfig.class
 com/bibliotheque/entity/dto/LivreDTO.class
 com/bibliotheque/entity/mapper/RoleMapper.class
 com/bibliotheque/controller/UserController.class
@@ -41,4 +40,5 @@ com/bibliotheque/service/BibliothequeService.class
 com/bibliotheque/entity/mapper/BibliothequeMapperImpl.class
 com/bibliotheque/entity/mapper/EntityMapper.class
 com/bibliotheque/exception/RecordNotFoundException.class
+com/bibliotheque/form/LoginForm.class
 com/bibliotheque/entity/mapper/UserMapperImpl.class
