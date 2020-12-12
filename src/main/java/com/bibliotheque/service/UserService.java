@@ -4,6 +4,7 @@ import com.bibliotheque.entity.Livre;
 import com.bibliotheque.entity.Role;
 import com.bibliotheque.entity.User;
 import com.bibliotheque.exception.RecordNotFoundException;
+import com.bibliotheque.form.LoginForm;
 import com.bibliotheque.repository.RoleRepository;
 import com.bibliotheque.repository.UserRepository;
 import org.slf4j.Logger;
@@ -30,6 +31,18 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
+
+    /*Methode pour transformer un mot de passe en mot de passe codé*/
+    public String getMotDePasseCode(String motDePasse){
+        return passwordEncoder.encode(motDePasse);
+    }
+
+    /*Methode pour vérifier un mot de passe en mot de passe codé*/
+    public Boolean verificationMotDePasse(String motDePasse, LoginForm user){
+        return passwordEncoder.matches(motDePasse,customUserDetailsService.loadUserByUsername(user.getUserName()).getPassword());
+    }
 
     /*Methode pour avoir tous les users enregistrés dans la base de données*/
     public List<User> getAllUsers() {

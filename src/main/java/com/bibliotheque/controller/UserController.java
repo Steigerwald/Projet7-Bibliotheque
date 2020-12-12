@@ -12,6 +12,8 @@ import com.bibliotheque.service.CustomUserDetailsService;
 import com.bibliotheque.service.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,14 +43,20 @@ public class UserController {
     @Autowired
     public RoleMapper roleMapper;
 
+    Logger logger = (Logger) LoggerFactory.getLogger(UserController.class);
+
 
     /* controller login pour se connecter*/
     @RequestMapping(path="login",method=RequestMethod.PUT)
     @ResponseBody
     public String login(@RequestBody LoginForm user) {
-        customUserDetailsService.loadUserByUsername(user.getUserName());
+        logger.info(" username du user: "+customUserDetailsService.loadUserByUsername(user.getUserName()).getUsername());
+        logger.info(" password du user: "+customUserDetailsService.loadUserByUsername(user.getUserName()).getPassword());
+        logger.info(" le role du user: "+customUserDetailsService.loadUserByUsername(user.getUserName()).getAuthorities());
         User userTrouve = userService.getUserByMail(user.getUserName());
-        if (userTrouve != null) {
+        logger.info(" le mot de passe encode: "+userService.getMotDePasseCode(user.getMotDePasse()));
+
+        if ((userTrouve != null)&(userService.verificationMotDePasse(user.getMotDePasse(),user))) {
             String token = getJWTToken(user.getUserName());
             User userConnecte = new User();
             userConnecte.setMailUser(user.getUserName());

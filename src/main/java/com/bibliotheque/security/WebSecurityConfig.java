@@ -34,10 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     // Injection de l'identification
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth, DataSource dataSource) throws Exception {
-
-        auth.jdbcAuthentication()
-                .dataSource(dataSource);
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .userDetailsService(customUserDetailsService)
                 .passwordEncoder(passwordEncoder());
