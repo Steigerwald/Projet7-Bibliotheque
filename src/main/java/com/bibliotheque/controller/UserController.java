@@ -26,7 +26,6 @@ import javax.servlet.http.HttpSession;
 import java.util.*;
 import java.util.stream.Collectors;
 
-
 @RestController
 @RequestMapping("/")
 public class UserController {
@@ -45,22 +44,22 @@ public class UserController {
 
     Logger logger = (Logger) LoggerFactory.getLogger(UserController.class);
 
-
     /* controller login pour se connecter*/
-    @RequestMapping(path="login",method=RequestMethod.PUT)
+    @RequestMapping(path="login",method=RequestMethod.POST)
     @ResponseBody
     public String login(@RequestBody LoginForm user) {
-        logger.info(" username du user: "+customUserDetailsService.loadUserByUsername(user.getUserName()).getUsername());
-        logger.info(" password du user: "+customUserDetailsService.loadUserByUsername(user.getUserName()).getPassword());
-        logger.info(" le role du user: "+customUserDetailsService.loadUserByUsername(user.getUserName()).getAuthorities());
         User userTrouve = userService.getUserByMail(user.getUserName());
-        logger.info(" le mot de passe encode: "+userService.getMotDePasseCode(user.getMotDePasse()));
-
-        if ((userTrouve != null)&(userService.verificationMotDePasse(user.getMotDePasse(),user))) {
-            String token = getJWTToken(user.getUserName());
-            User userConnecte = new User();
-            userConnecte.setMailUser(user.getUserName());
-            return token;
+        if (userTrouve != null) {
+            if (userService.verificationMotDePasse(user.getMotDePasse(),user)) {
+                logger.info(" username du user: "+customUserDetailsService.loadUserByUsername(user.getUserName()).getUsername());
+                logger.info(" password du user: "+customUserDetailsService.loadUserByUsername(user.getUserName()).getPassword());
+                logger.info(" le role du user: "+customUserDetailsService.loadUserByUsername(user.getUserName()).getAuthorities());
+                logger.info(" le mot de passe encode: "+userService.getMotDePasseCode(user.getMotDePasse()));
+                String token = getJWTToken(user.getUserName());
+                return token;
+            }else{
+                return "mot de passe invalide";
+            }
         } else {
             return "not found";
         }
@@ -100,7 +99,6 @@ public class UserController {
         List<User> tousLesUsers= userService.getAllUsers();
         return new ResponseEntity<>(userMapper.toDto(tousLesUsers), HttpStatus.OK);
     }
-
 
     /* controller pour obtenir un user */
     @RequestMapping(path="user/{id}",method=RequestMethod.GET)
@@ -176,8 +174,4 @@ public class UserController {
         params.put("roles",roles);
         return params;
     }
-
-
-
-
 }
