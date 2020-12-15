@@ -79,11 +79,11 @@ public class UserService {
         }
     }
 
-
     /*Methode pour sauvegarder dans une base de données un User*/
-    public User saveUser (User user) {
+    public User saveUser (User user) throws RecordNotFoundException {
         user.setMotDePasse(passwordEncoder.encode(user.getMotDePasse()));
         user.setActifUser(true);
+        user.setRole(getRoleById(2));
         logger.info(" récupération du mot de passe et l'encode pour l'enregistrer");
         return userRepository.save(user);
     }
