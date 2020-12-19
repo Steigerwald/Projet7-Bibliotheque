@@ -47,11 +47,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET,"/livre/**").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
-                .antMatchers(HttpMethod.POST, "/login","/livre/search","/livre/addLivre","/livre/exemplairesDisponibles","/reservation/addReservation","/user/me","/user/addUser").permitAll()
-                .antMatchers(HttpMethod.GET,"/livre/allExemplaires/**","/livre/allExemplairesDisponibles/**","/user/**","/users/","/bibliotheque/**","/reservation/**").permitAll()
-                .antMatchers(HttpMethod.DELETE,"/livre/**").permitAll()
-                .antMatchers(HttpMethod.PUT,"/livre/","/reservation/","/reservation/verifierReservation").permitAll()
+                .antMatchers(HttpMethod.GET,"/livre/**","/livre/allExemplaires/**","/livre/allExemplairesDisponibles/**").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+                .antMatchers(HttpMethod.GET,"/user/**","/users/","/bibliotheque/**","/reservation/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers(HttpMethod.POST, "/livre/addLivre","/user/addUser").access("hasRole('ROLE_ADMIN')")
+                .antMatchers(HttpMethod.POST, "/livre/search","/livre/exemplairesDisponibles","/reservation/addReservation","/user/me").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+                .antMatchers(HttpMethod.POST, "/login").permitAll()
+                .antMatchers(HttpMethod.DELETE,"/livre/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers(HttpMethod.PUT,"/livre/","/reservation/","/reservation/verifierReservation").access("hasRole('ROLE_ADMIN')")
                 .anyRequest().authenticated();
     }
 }
