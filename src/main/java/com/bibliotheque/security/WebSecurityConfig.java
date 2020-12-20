@@ -50,8 +50,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET,"/livre/**","/livre/allExemplaires/**","/livre/allExemplairesDisponibles/**").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
                 .antMatchers(HttpMethod.GET,"/user/**","/users/","/bibliotheque/**","/reservation/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers(HttpMethod.POST, "/livre/addLivre","/user/addUser").access("hasRole('ROLE_ADMIN')")
-                .antMatchers(HttpMethod.POST, "/livre/search","/livre/exemplairesDisponibles","/reservation/addReservation","/user/me").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
-                .antMatchers(HttpMethod.POST, "/login").permitAll()
+                .antMatchers(HttpMethod.POST, "/livre/search","/livre/exemplairesDisponibles","/reservation/addReservation").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+                .antMatchers(HttpMethod.POST, "/login","/user/me").permitAll()
                 .antMatchers(HttpMethod.DELETE,"/livre/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers(HttpMethod.PUT,"/livre/","/reservation/","/reservation/verifierReservation").access("hasRole('ROLE_ADMIN')")
                 .anyRequest().authenticated();

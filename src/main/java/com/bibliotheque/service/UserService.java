@@ -59,6 +59,7 @@ public class UserService {
     /*Methode pour obtenir un User par par une adresse mail*/
     public User getUserByMail(String mail) {
         Optional<User> userTrouve = userRepository.findByMailUser(mail);
+        logger.info(" le mail recherché est:"+mail);
         if(userTrouve.isPresent()) {
             logger.info(" retour du userTrouve grâce au mail car il est présent ");
             return userTrouve.get();

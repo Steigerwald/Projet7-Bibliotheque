@@ -2,7 +2,9 @@ package com.bibliotheque.controller;
 
 import com.bibliotheque.entity.Role;
 import com.bibliotheque.entity.User;
+import com.bibliotheque.entity.dto.LivreDTO;
 import com.bibliotheque.entity.dto.RoleDTO;
+import com.bibliotheque.entity.dto.SearchDTO;
 import com.bibliotheque.entity.dto.UserDTO;
 import com.bibliotheque.entity.mapper.RoleMapper;
 import com.bibliotheque.entity.mapper.UserMapper;
@@ -83,9 +85,11 @@ public class UserController {
         return "Bearer " + token;
     }
 
-    @RequestMapping(path="user/me",method=RequestMethod.POST)
-    public ResponseEntity<UserDTO> userConnecte(@RequestParam("username") String username) {
-        User userConcerne = userService.getUserByMail(username);
+
+    @RequestMapping(path = "user/me", method = RequestMethod.POST,produces = "application/json")
+    public ResponseEntity<UserDTO> userConnecte(@RequestBody UserDTO userDTO) {
+        User userRecherche = userMapper.toEntity(userDTO);
+        User userConcerne = userService.getUserByMail(userRecherche.getMailUser());
         if (userConcerne==null){
             return new ResponseEntity<>(userMapper.toDto(userConcerne), HttpStatus.NOT_FOUND);
         }else{
