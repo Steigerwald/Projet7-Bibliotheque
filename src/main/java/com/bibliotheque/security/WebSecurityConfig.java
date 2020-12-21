@@ -40,20 +40,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(passwordEncoder());
     }
 
-
     // Les règles de sécurité
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET,"/livre/**","/livre/allExemplaires/**","/livre/allExemplairesDisponibles/**").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
-                .antMatchers(HttpMethod.GET,"/user/**","/users/","/bibliotheque/**","/reservation/**").access("hasRole('ROLE_ADMIN')")
-                .antMatchers(HttpMethod.POST, "/livre/addLivre","/user/addUser").access("hasRole('ROLE_ADMIN')")
-                .antMatchers(HttpMethod.POST, "/livre/search","/livre/exemplairesDisponibles","/reservation/addReservation").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
-                .antMatchers(HttpMethod.POST, "/login","/user/me").permitAll()
-                .antMatchers(HttpMethod.DELETE,"/livre/**").access("hasRole('ROLE_ADMIN')")
-                .antMatchers(HttpMethod.PUT,"/livre/","/reservation/","/reservation/verifierReservation").access("hasRole('ROLE_ADMIN')")
+                .antMatchers(HttpMethod.GET,"/livre/**","/livre/allExemplaires/**","/livre/allExemplairesDisponibles/**","/user/**","/users/","/bibliotheque/**","/reservation/**","/roles","/role/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/login","/user/me","/livre/addLivre","/user/addUser","/livre/search","/livre/exemplairesDisponibles","/reservation/addReservation").permitAll()
+                .antMatchers(HttpMethod.DELETE,"/livre/**").permitAll()
+                .antMatchers(HttpMethod.PUT,"/livre/","/reservation/","/reservation/verifierReservation").permitAll()
                 .anyRequest().authenticated();
     }
 }
