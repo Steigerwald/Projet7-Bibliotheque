@@ -46,11 +46,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET,"/user/**","/users/","/roles","/role/**").permitAll()
+                .antMatchers(HttpMethod.GET,"/user/**","/users/","/roles","/role/**","/reservation/Encours").permitAll()
+                .antMatchers(HttpMethod.GET,"/reservation/AValider").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/login","/user/me").permitAll()
-                .antMatchers(HttpMethod.POST, "/livre/addLivre","/user/addUser","/reservation/addReservation").hasRole("ADMIN")
+                //.antMatchers(HttpMethod.POST, "/livre/addLivre","/user/addUser","/reservation/addReservation").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE,"/livre/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.PUT,"/livre/","/reservation/").hasRole("ADMIN")
                 .anyRequest().authenticated();
     }
 }

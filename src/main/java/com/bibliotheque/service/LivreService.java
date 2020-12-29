@@ -30,12 +30,16 @@ public class LivreService {
     /*Methode pour obtenir tous les livres en un seul exemplaire disponibles de la base de données*/
     public List<Livre> getAllExemplairesDisponiblesEnUnSeulExemplaire() {
         List<Livre> result1 = livreRepository.findAll();
+        //logger.info(" liste e result1"+result1);
         List<Livre> result2=new ArrayList<Livre>();
         if(result1.size() > 0) {
             logger.info(" retour liste result1 de tous les livres de la BD avec getAllLivresDisponoibles si taille de result1 >0 ");
             present=false;
-            for (int i=0;i<result1.size();i=i+1){
+            logger.info(" taille de result1: "+result1.size());
+            result2.add(result1.get(0));
+            for (int i=1;i<result1.size();i=i+1){
                 //if (result1.get(i).getDisponibilite()) {
+                    present=false;
                     for (int j=0;j<result2.size();j=j+1){
                         if (result1.get(i).getTitre().equals(result2.get(j).getTitre())) {
                             present=true;
@@ -43,10 +47,11 @@ public class LivreService {
                     }
                     if (!present){
                         result2.add(result1.get(i));
+                        logger.info(" retour du titre ajouté"+result1.get(i).getTitre());
                     }
                 }
             }
-        //logger.info(" retour de la liste result2 "+result2);
+        logger.info(" taille de la liste result2 "+result2.size());
             return result2;
         //} else {
             //logger.info(" retour nouvelle liste des Livres Disponibles car pas d'élément dans la liste result1 ");
