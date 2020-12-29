@@ -57,8 +57,7 @@ public class UserController {
                 logger.info(" password du user: "+customUserDetailsService.loadUserByUsername(user.getUserName()).getPassword());
                 logger.info(" le role du user: "+customUserDetailsService.loadUserByUsername(user.getUserName()).getAuthorities());
                 logger.info(" le mot de passe encode: "+userService.getMotDePasseCode(user.getMotDePasse()));
-                String token = getJWTToken(user.getUserName());
-                return token;
+                return getJWTToken(user.getUserName());
             }else{
                 return "mot de passe invalide";
             }

@@ -1,8 +1,11 @@
 package com.bibliotheque.controller;
 
 import com.bibliotheque.entity.Reservation;
+import com.bibliotheque.entity.User;
 import com.bibliotheque.entity.dto.ReservationDTO;
+import com.bibliotheque.entity.dto.UserDTO;
 import com.bibliotheque.entity.mapper.ReservationMapper;
+import com.bibliotheque.entity.mapper.UserMapper;
 import com.bibliotheque.exception.RecordNotFoundException;
 import com.bibliotheque.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,10 @@ public class ReservationController {
 
     @Autowired
     ReservationMapper reservationMapper;
+
+
+    @Autowired
+    UserMapper userMapper;
 
     /* controller pour avoir toutes les reservations*/
     @RequestMapping(path ="/",method = RequestMethod.GET)
@@ -92,6 +99,14 @@ public class ReservationController {
         Reservation reservationAVerifier = reservationMapper.toEntity(reservationAVerifierDTO);
         ReservationDTO dto =reservationMapper.toDto(reservationService.verifierEtatReservation(reservationAVerifier));
         return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
+
+    /* controller pour avoir toutes les reservations en attente*/
+    @RequestMapping(path ="/byUser",method = RequestMethod.POST)
+    public ResponseEntity<List<ReservationDTO> >listOfReservationsByUser(@RequestBody UserDTO userDTO) {
+        User user =userMapper.toEntity(userDTO);
+        List<Reservation> toutesReservationsByUser =reservationService.findAllByUser(user);
+        return new ResponseEntity<>(reservationMapper.toDto(toutesReservationsByUser), HttpStatus.OK);
     }
 
 }

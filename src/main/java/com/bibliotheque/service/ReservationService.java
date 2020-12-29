@@ -1,6 +1,7 @@
 package com.bibliotheque.service;
 
 import com.bibliotheque.entity.Reservation;
+import com.bibliotheque.entity.User;
 import com.bibliotheque.exception.RecordNotFoundException;
 import com.bibliotheque.repository.ReservationRepository;
 import org.slf4j.Logger;
@@ -102,6 +103,11 @@ public class ReservationService {
     public List<Reservation> findAllEnCours() {
         String etatEnCours = "En cours de pret";
         return reservationRepository.findAllByEtatReservationOrIsactif(etatEnCours,true);
+    }
+
+    /*Methode pour avoir toutes les reservations d'un user en cours de la base de données*/
+    public List<Reservation> findAllByUser(User user) {
+        return reservationRepository.findAllByUser(user);
     }
 
 

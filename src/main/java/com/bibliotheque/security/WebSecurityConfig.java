@@ -46,10 +46,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET,"/livre/**","/livre/allExemplaires/**","/livre/allExemplairesDisponibles/**","/user/**","/users/","/bibliotheque/**","/reservation/**","/roles","/role/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/login","/user/me","/livre/addLivre","/user/addUser","/livre/search","/livre/exemplairesDisponibles","/reservation/addReservation").permitAll()
-                .antMatchers(HttpMethod.DELETE,"/livre/**").permitAll()
-                .antMatchers(HttpMethod.PUT,"/livre/","/reservation/","/reservation/verifierReservation").permitAll()
+                .antMatchers(HttpMethod.GET,"/user/**","/users/","/roles","/role/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/login","/user/me").permitAll()
+                .antMatchers(HttpMethod.POST, "/livre/addLivre","/user/addUser","/reservation/addReservation").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE,"/livre/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT,"/livre/","/reservation/").hasRole("ADMIN")
                 .anyRequest().authenticated();
     }
 }
