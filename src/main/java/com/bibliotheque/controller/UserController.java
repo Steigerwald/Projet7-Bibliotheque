@@ -57,7 +57,7 @@ public class UserController {
                 logger.info(" password du user: "+customUserDetailsService.loadUserByUsername(user.getUserName()).getPassword());
                 logger.info(" le role du user: "+customUserDetailsService.loadUserByUsername(user.getUserName()).getAuthorities());
                 logger.info(" le mot de passe encode: "+userService.getMotDePasseCode(user.getMotDePasse()));
-                return getJWTToken(user.getUserName());
+                return getJWTToken(user.getUserName(),userTrouve.getRole().getNomRole());
             }else{
                 return "mot de passe invalide";
             }
@@ -66,10 +66,10 @@ public class UserController {
         }
     }
 
-    private String getJWTToken(String username) {
+    private String getJWTToken(String username,String userRole) {
         String secretKey = "mySecretKey";
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils
-                .commaSeparatedStringToAuthorityList("ROLE_USER");
+                .commaSeparatedStringToAuthorityList(userRole);
         String token = Jwts
                 .builder()
                 .setId("softtekJWT")
