@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -109,4 +110,19 @@ public class ReservationController {
         return new ResponseEntity<>(reservationMapper.toDto(toutesReservationsByUser), HttpStatus.OK);
     }
 
+
+    /* controller pour avoir toutes les reservations qui sont à traiter par le batch*/
+    @RequestMapping(path ="/all/batch",method = RequestMethod.GET)
+    public ResponseEntity<List<ReservationDTO> >listOfReservationsForBatch() {
+        List<Reservation> toutesReservations =reservationService.findAll();
+        List<Reservation> reservationsBatch =new ArrayList<>();
+        if (!toutesReservations.isEmpty()){
+            for (Reservation reservation:toutesReservations){
+                if (reservationService.verfierDateDeRetrait(reservation)){
+                    reservationsBatch.add(reservation);
+                }
+            }
+        }
+        return new ResponseEntity<>(reservationMapper.toDto(reservationsBatch), HttpStatus.OK);
+    }
 }
