@@ -43,7 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET,"/user/**","/users/","/roles","/role/**","/reservation/Encours").permitAll()
-                .antMatchers(HttpMethod.GET,"/reservation/AValider").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET,"/reservation/AValider","/reservation/all/batch").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/login","/user/me","/user/addUser").permitAll()
                 .antMatchers(HttpMethod.POST, "/livre/addLivre").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE,"/livre/**").hasRole("ADMIN")
