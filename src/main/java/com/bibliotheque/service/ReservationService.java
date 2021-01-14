@@ -50,6 +50,7 @@ public class ReservationService {
         entity.setEtatReservation("En attente confirmation");
         entity.setProlongation(false);
         entity.setIsactif(true);
+        entity.setRelance(false);
         //enregistrement de la reservation dans la basse de données
         logger.info(" retour de l'entité newReservation de createBReservation qui a été créée et sauvegardée");
         return reservationRepository.save(entity);

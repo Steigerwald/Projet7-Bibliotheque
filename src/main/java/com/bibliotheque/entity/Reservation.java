@@ -43,6 +43,9 @@ public class Reservation {
     @Column(name="ISACTIF")
     private Boolean isactif;
 
+    @Column(name="RELANCE")
+    private Boolean relance;
+
     @ManyToOne
     private User user;
 
