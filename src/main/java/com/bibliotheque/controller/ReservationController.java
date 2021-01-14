@@ -8,6 +8,8 @@ import com.bibliotheque.entity.mapper.ReservationMapper;
 import com.bibliotheque.entity.mapper.UserMapper;
 import com.bibliotheque.exception.RecordNotFoundException;
 import com.bibliotheque.service.ReservationService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +32,9 @@ public class ReservationController {
 
     @Autowired
     UserMapper userMapper;
+
+    Logger logger = (Logger) LoggerFactory.getLogger(ReservationController.class);
+
 
     /* controller pour avoir toutes les reservations*/
     @RequestMapping(path ="/",method = RequestMethod.GET)
@@ -115,14 +120,16 @@ public class ReservationController {
     @RequestMapping(path ="/all/batch",method = RequestMethod.GET)
     public ResponseEntity<List<ReservationDTO> >listOfReservationsForBatch() {
         List<Reservation> toutesReservations =reservationService.findAll();
+        logger.info(" taille de toutes les réservations : "+toutesReservations.size());
         List<Reservation> reservationsBatch =new ArrayList<>();
         if (!toutesReservations.isEmpty()){
             for (Reservation reservation:toutesReservations){
-                if (reservationService.verfierDateDeRetrait(reservation)){
+                if (!reservationService.verfierDateDeRetrait(reservation)){
                     reservationsBatch.add(reservation);
                 }
             }
         }
+        logger.info(" taille de la liste les réservations pour batch : "+reservationsBatch.size());
         return new ResponseEntity<>(reservationMapper.toDto(reservationsBatch), HttpStatus.OK);
     }
 }
