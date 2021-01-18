@@ -43,7 +43,7 @@ INSERT INTO bibliotheques.TBL_RESERVATION (id_reservation, date_retrait, date_re
 INSERT INTO bibliotheques.TBL_USER (id_user,actif_user, mail_user, mot_passe, nom_user,prenom_user,role_id_role) VALUES
 (1,true, 'admin@gmail.com', '$2a$10$orNTHc4cA9i1.rYJaOC.iub.TGnufPupGjwja3qa5dfXrf7olXjBO', 'Steigerwald','Brice',1),
 (2,true, 'user@gmail.com', '$2a$10$GQXfIS9n2oJuE1lVI70yFeu5iJn/PEm5B0CUrfGEUT7bSRcsuqCnS', 'Steigerwald','Jacques',2),
-(3,true, 'tara@gmail.com', '$2a$10$GQXfIS9n2oJuE1lVI70yFeu5iJn/PEm5B0CUrfGEUT7bSRcsuqCnS', 'Hot','Tara',1),
+(3,true, 'brice.steigerwald@numericable.fr', '$2a$10$GQXfIS9n2oJuE1lVI70yFeu5iJn/PEm5B0CUrfGEUT7bSRcsuqCnS', 'Hot','Tara',1),
 (4,true, 'jean@gmail.com', '$2a$10$GQXfIS9n2oJuE1lVI70yFeu5iJn/PEm5B0CUrfGEUT7bSRcsuqCnS', 'Pierre','Jean',2),
 (5,true, 'anne@gmail.com', '$2a$10$GQXfIS9n2oJuE1lVI70yFeu5iJn/PEm5B0CUrfGEUT7bSRcsuqCnS', 'Priska','Anne',2),
 (6,true, 'batch@gmail.com', '$2a$10$orNTHc4cA9i1.rYJaOC.iub.TGnufPupGjwja3qa5dfXrf7olXjBO', 'Batch','AutreBatch',1);

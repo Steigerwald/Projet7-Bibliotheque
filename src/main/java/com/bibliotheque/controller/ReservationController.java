@@ -116,7 +116,7 @@ public class ReservationController {
     }
 
 
-    /* controller pour avoir toutes les reservations qui sont à traiter par le batch*/
+    /* controller pour avoir toutes les reservations à relancer 1 fois qui sont à traiter par le batch*/
     @RequestMapping(path ="/all/batch",method = RequestMethod.GET)
     public ResponseEntity<List<ReservationDTO> >listOfReservationsForBatch() {
         List<Reservation> toutesReservations =reservationService.findAll();
@@ -124,7 +124,7 @@ public class ReservationController {
         List<Reservation> reservationsBatch =new ArrayList<>();
         if (!toutesReservations.isEmpty()){
             for (Reservation reservation:toutesReservations){
-                if (!reservationService.verfierDateDeRetrait(reservation)){
+                if (!reservationService.verfierDateDeRetrait(reservation)&&(!reservation.getRelance())){
                     reservationsBatch.add(reservation);
                 }
             }
