@@ -2,7 +2,6 @@ package com.bibliotheque.entity;
 
 import lombok.Data;
 import org.springframework.lang.Nullable;
-
 import javax.persistence.*;
 import java.util.List;
 

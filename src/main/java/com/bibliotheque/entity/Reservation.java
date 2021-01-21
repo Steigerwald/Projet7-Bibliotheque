@@ -2,10 +2,8 @@ package com.bibliotheque.entity;
 
 import lombok.Data;
 import org.springframework.lang.Nullable;
-
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "TBL_RESERVATION")

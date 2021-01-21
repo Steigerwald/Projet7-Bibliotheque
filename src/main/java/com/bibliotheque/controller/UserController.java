@@ -2,9 +2,7 @@ package com.bibliotheque.controller;
 
 import com.bibliotheque.entity.Role;
 import com.bibliotheque.entity.User;
-import com.bibliotheque.entity.dto.LivreDTO;
 import com.bibliotheque.entity.dto.RoleDTO;
-import com.bibliotheque.entity.dto.SearchDTO;
 import com.bibliotheque.entity.dto.UserDTO;
 import com.bibliotheque.entity.mapper.RoleMapper;
 import com.bibliotheque.entity.mapper.UserMapper;
