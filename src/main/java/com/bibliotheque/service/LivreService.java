@@ -4,6 +4,7 @@ import com.bibliotheque.entity.Livre;
 import com.bibliotheque.exception.RecordNotFoundException;
 import com.bibliotheque.form.Search;
 import com.bibliotheque.repository.LivreRepository;
+import lombok.var;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -154,7 +155,8 @@ public class LivreService {
 
     /*Methode pour une recherche de livres*/
     public List<Livre> getAllLivresBySearch(Search search){
-        return livreRepository.findAllLivresByTitreLikeOrAuteurLikeOrNomCategorieLike(search.getTitre(),search.getAuteur(),search.getNomCategorie());
+        //return livreRepository.findAllLivresByTitreOrAuteurOrNomCategorie(search.getTitre(),search.getAuteur(),search.getNomCategorie());
+        return livreRepository.findAllLivresByTitreStartsWithOrAuteurOrNomCategorie(search.getTitre(),search.getAuteur(),search.getNomCategorie());
     }
 
     /*Methode pour obtenir tous les exemplaires disponibles d'un livre par titre */

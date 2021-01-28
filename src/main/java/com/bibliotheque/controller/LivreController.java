@@ -8,6 +8,8 @@ import com.bibliotheque.entity.mapper.SearchMapper;
 import com.bibliotheque.exception.RecordNotFoundException;
 import com.bibliotheque.form.Search;
 import com.bibliotheque.service.LivreService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +31,9 @@ public class LivreController {
 
     @Autowired
     SearchMapper searchMapper;
+
+    Logger logger = (Logger) LoggerFactory.getLogger(LivreController.class);
+
 
 
     /* controller pour avoir tous les livres par exemplaire*/
@@ -107,6 +112,7 @@ public class LivreController {
     public ResponseEntity<List<LivreDTO> >searchLivresByTitreOrByAuteurOrByNomCategorie(@RequestBody SearchDTO searchDTO) {
         Search search=searchMapper.toEntity(searchDTO);
         List<Livre> listLivresTrouves = livreService.getAllLivresBySearch(search);
+        logger.info(" taille de la liste de search : "+listLivresTrouves.size());
         return new ResponseEntity<>(livreMapper.toDto(listLivresTrouves),HttpStatus.OK);
     }
 
