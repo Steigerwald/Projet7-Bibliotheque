@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -106,11 +107,7 @@ public class LivreController {
     public ResponseEntity<List<LivreDTO> >searchLivresByTitreOrByAuteurOrByNomCategorie(@RequestBody SearchDTO searchDTO) {
         Search search=searchMapper.toEntity(searchDTO);
         List<Livre> listLivresTrouves = livreService.getAllLivresBySearch(search);
-        if (listLivresTrouves.size()==0){
-            return new ResponseEntity<>(livreMapper.toDto(listLivresTrouves),HttpStatus.NOT_FOUND);
-        } else{
-            return new ResponseEntity<>(livreMapper.toDto(listLivresTrouves),HttpStatus.OK);
-        }
+        return new ResponseEntity<>(livreMapper.toDto(listLivresTrouves),HttpStatus.OK);
     }
 
     /* Controller pour chercher un livre par titre disponible et tous les exemplaires */

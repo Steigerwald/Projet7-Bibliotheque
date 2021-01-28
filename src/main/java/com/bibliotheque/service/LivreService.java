@@ -152,10 +152,9 @@ public class LivreService {
         }
     }
 
-
     /*Methode pour une recherche de livres*/
     public List<Livre> getAllLivresBySearch(Search search){
-        return livreRepository.findAllLivresByTitreOrAuteurOrNomCategorie(search.getTitre(),search.getAuteur(),search.getNomCategorie());
+        return livreRepository.findAllLivresByTitreLikeOrAuteurLikeOrNomCategorieLike(search.getTitre(),search.getAuteur(),search.getNomCategorie());
     }
 
     /*Methode pour obtenir tous les exemplaires disponibles d'un livre par titre */
