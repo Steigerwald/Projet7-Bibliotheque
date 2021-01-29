@@ -156,8 +156,34 @@ public class LivreService {
     /*Methode pour une recherche de livres*/
     public List<Livre> getAllLivresBySearch(Search search){
         //return livreRepository.findAllLivresByTitreOrAuteurOrNomCategorie(search.getTitre(),search.getAuteur(),search.getNomCategorie());
-        return livreRepository.findAllLivresByTitreStartsWithOrAuteurOrNomCategorie(search.getTitre(),search.getAuteur(),search.getNomCategorie());
+        //return livreRepository.findAllLivresByTitreStartsWithOrAuteurOrNomCategorie(search.getTitre(),search.getAuteur(),search.getNomCategorie());
+    List<Livre> livreTotal = new ArrayList<>();
+    logger.info(" valeur de titre "+ search.getTitre());
+    logger.info(" valeur de auteur "+ search.getAuteur());
+    logger.info(" valeur de nom catégorie "+ search.getNomCategorie());
+    if ((!search.getTitre().equals(""))&&(search.getAuteur().equals(""))&&(search.getNomCategorie().equals(""))){
+        livreTotal.addAll(livreRepository.findAllLivresByTitreStartsWith(search.getTitre()));
+        }
+    if ((search.getTitre().equals(""))&&(!search.getAuteur().equals(""))&&(search.getNomCategorie().equals(""))){
+        livreTotal.addAll(livreRepository.findAllLivresByAuteurStartsWith(search.getAuteur()));
+        }
+    if ((search.getTitre().equals(""))&&(search.getAuteur().equals(""))&&(!search.getNomCategorie().equals(""))){
+            livreTotal.addAll(livreRepository.findAllLivresByNomCategorie(search.getNomCategorie()));
+        }
+    if ((!search.getTitre().equals(""))&&!(search.getAuteur().equals(""))&&(search.getNomCategorie().equals(""))){
+            livreTotal.addAll(livreRepository.findAllLivresByTitreStartsWithAndAuteurStartsWith(search.getTitre(),search.getAuteur()));
+        }
+    if ((!search.getTitre().equals(""))&&(search.getAuteur().equals(""))&&!(search.getNomCategorie().equals(""))){
+            livreTotal.addAll(livreRepository.findAllLivresByTitreStartsWithAndNomCategorie(search.getTitre(),search.getNomCategorie()));
+        }
+    if ((search.getTitre().equals(""))&&!(search.getAuteur().equals(""))&&!(search.getNomCategorie().equals(""))){
+            livreTotal.addAll(livreRepository.findAllLivresByAuteurStartsWithAndNomCategorie(search.getAuteur(),search.getNomCategorie()));
+        }
+    return livreTotal;
     }
+
+
+
 
     /*Methode pour obtenir tous les exemplaires disponibles d'un livre par titre */
     public List<Livre> getLivreDisponibleByTitre(String titre) throws RecordNotFoundException {

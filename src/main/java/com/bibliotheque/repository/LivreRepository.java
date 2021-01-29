@@ -16,6 +16,9 @@ public interface LivreRepository extends JpaRepository<Livre, Integer> {
     List<Livre> findAllLivresByTitreStartsWith(String titre);
     List<Livre> findAllLivresByAuteurStartsWith(String auteur);
     List<Livre> findAllLivresByNomCategorie(String nomCategorie);
+    List<Livre> findAllLivresByTitreStartsWithAndAuteurStartsWith(String titre,String auteur);
+    List<Livre> findAllLivresByTitreStartsWithAndNomCategorie(String titre,String nomCategorie);
+    List<Livre> findAllLivresByAuteurStartsWithAndNomCategorie(String auteur,String nomCatégorie);
     List<Livre> findAllLivresByTitreOrAuteurOrNomCategorie(String titre, String auteur, String nomCategorie);
     List<Livre> findAllLivresByTitreLikeOrAuteurLikeOrNomCategorieLike(String titre, String auteur, String nomCategorie);
     List<Livre> findAllLivresByTitreStartingWithOrAuteurStartingWithOrNomCategorieStartingWith(String titre, String auteur, String nomCategorie);
